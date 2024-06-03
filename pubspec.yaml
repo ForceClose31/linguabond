@@ -20,6 +20,9 @@ dependencies:
     git:
       url: https://github.com/BlastTea/MWidget.git
       ref: b1191678af1bbefe4ffde909b42804708bb5ab17
+  flutter_svg: ^2.0.10+1
+  flutter_sticky_header: ^0.6.5
+  freezed_annotation: ^2.4.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -27,3 +30,18 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/svgs/
+    - .env
+  fonts:
+    - family: FeatherBold
+      fonts:
+        - asset: packages/linguabound_widget/fonts/FeatherBold/FeatherBold.ttf
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.png"
+  adaptive_icon_background: "assets/images/logo-background.png"
+  adaptive_icon_foreground: "assets/images/logo-foreground.png"
+

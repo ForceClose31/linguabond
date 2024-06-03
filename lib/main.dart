@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:linguabond/views/pages/pages.dart';
+import 'package:linguabound_widget/linguabound_widget.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await LinguaboundWidget.initialize();
+
+  runApp(const MainApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Linguabond',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const Text("Hello world"),
-    );
-  }
+  Widget build(BuildContext context) => const LinguaboundMaterialApp(
+        title: 'Linguabound',
+        home: const SignInPage(),
+      );
 }
