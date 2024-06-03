@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # linguabond
 
 A new Flutter project.
