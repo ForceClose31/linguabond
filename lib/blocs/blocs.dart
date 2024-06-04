@@ -17,3 +17,7 @@ part 'authentication_bloc/authentication_state.dart';
 part 'leaderboard_bloc/leaderboard_bloc.dart';
 part 'leaderboard_bloc/leaderboard_event.dart';
 part 'leaderboard_bloc/leaderboard_state.dart';
+
+part 'meet_bloc/meet_bloc.dart';
+part 'meet_bloc/meet_event.dart';
+part 'meet_bloc/meet_state.dart';

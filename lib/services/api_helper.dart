@@ -296,4 +296,18 @@ final class ApiHelper {
 
     return showErrorDialog(e.toString());
   }
+
+  static Future<Meet> addMeet(Meet meet) async {
+    final response = await post(
+      pathUrl: dotenv.env['ENDPOINT_MEET_MENTOR_ADD']!,
+      body: meet.toJson(),
+    );
+    return Meet.fromJson(response['data']);
+  }
+
+  static Future<void> publishMeet(int id) async {
+    await post(
+      pathUrl: '${dotenv.env['ENDPOINT_MEET_MENTOR_PUBLISH']}/$id',
+    );
+  }
 }
