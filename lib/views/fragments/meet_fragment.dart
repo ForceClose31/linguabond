@@ -38,7 +38,10 @@ class MeetFragment extends StatelessWidget {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 16.0, right: 16.0),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            NavigationHelper.to(
+                SlidePageRoute(pageBuilder: (context) => const AddMeetPage()));
+          },
           child: const Icon(Icons.add),
         ),
       ),

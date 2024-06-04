@@ -49,20 +49,13 @@ sealed class UserDetail with _$UserDetail {
   factory UserDetail.mentor({
     String? nama,
     String? gelar,
-    @JsonKey(name: 'riwayat_pendidikan_terakhir') String? riwayatPendidikanTerakhir,
+    @JsonKey(name: 'riwayat_pendidikan_terakhir')
+    String? riwayatPendidikanTerakhir,
   }) = Mentor;
 
-  @FreezedUnionValue('Parent')
-  factory UserDetail.orangTua({
-    int? id,
-    @JsonKey(name: 'nama_lengkap') String? namaLengkap,
-    String? kode,
-    @JsonKey(name: 'user_id') int? userId,
-    @JsonKey(name: 'created_at') DateTime? createdAt,
-    @JsonKey(name: 'updated_at') DateTime? updatedAt,
-  }) = OrangTua;
 
-  factory UserDetail.fromJson(Map<String, dynamic> json) => _$UserDetailFromJson(json);
+  factory UserDetail.fromJson(Map<String, dynamic> json) =>
+      _$UserDetailFromJson(json);
 }
 
 @freezed
@@ -81,14 +74,11 @@ class Leaderboard with _$Leaderboard {
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _Leaderboard;
 
-  factory Leaderboard.fromJson(Map<String, dynamic> json) => _$LeaderboardFromJson(json);
+  factory Leaderboard.fromJson(Map<String, dynamic> json) =>
+      _$LeaderboardFromJson(json);
 }
 
 enum UserRole {
-  @JsonValue('Remaja')
-  remaja,
   @JsonValue('Mentor')
   mentor,
-  @JsonValue('Parent')
-  parent,
 }

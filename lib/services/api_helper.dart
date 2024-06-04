@@ -1,13 +1,18 @@
 part of 'services.dart';
 
 final class ApiHelper {
-  static String get _url => kDebugMode ? dotenv.env['DEVELOPMENT_URL']! : dotenv.env['PRODUCTION_URL']!;
+  static String get _url => kDebugMode
+      ? dotenv.env['DEVELOPMENT_URL']!
+      : dotenv.env['PRODUCTION_URL']!;
 
-  static Future<Map<String, String>> _getHeaders({bool ignoreAuthorization = false, bool isMultipartFormData = false}) async {
+  static Future<Map<String, String>> _getHeaders(
+      {bool ignoreAuthorization = false,
+      bool isMultipartFormData = false}) async {
     return {
       if (!ignoreAuthorization) 'Authorization': 'Bearer ${await _getToken()}',
       'Access-Control-Allow-Origin': '*',
-      'Content-Type': isMultipartFormData ? 'multipart/form-data' : 'application/json',
+      'Content-Type':
+          isMultipartFormData ? 'multipart/form-data' : 'application/json',
       'Accept': 'application/json',
     };
   }
@@ -30,21 +35,27 @@ final class ApiHelper {
     Duration? timeout,
   }) async {
     http.Request request = http.Request(method, uri);
-    request.headers.addAll(await _getHeaders(ignoreAuthorization: ignoreAuthorization));
-    debugPrint('(http request) : $method ${request.url} ${request.headers} $body');
+    request.headers
+        .addAll(await _getHeaders(ignoreAuthorization: ignoreAuthorization));
+    debugPrint(
+        '(http request) : $method ${request.url} ${request.headers} $body');
     if (body != null) request.body = json.encode(body);
 
     http.StreamedResponse response;
     if (timeout == null) {
       response = await request.send();
     } else {
-      response = await request.send().timeout(timeout, onTimeout: _onRequestTimeout);
+      response =
+          await request.send().timeout(timeout, onTimeout: _onRequestTimeout);
     }
 
-    dynamic responseString = !decode ? await response.stream.toBytes() : await response.stream.bytesToString();
+    dynamic responseString = !decode
+        ? await response.stream.toBytes()
+        : await response.stream.bytesToString();
     if (response.statusCode != 200) {
       // debugPrint('(http response) : $method ${request.url} ${request.headers} $body => $responseString');
-      debugPrint('(http response) : $method ${request.url} ${request.headers} => $responseString');
+      debugPrint(
+          '(http response) : $method ${request.url} ${request.headers} => $responseString');
       throw {
         'data': json.decode(responseString),
         'status_code': response.statusCode,
@@ -53,12 +64,14 @@ final class ApiHelper {
 
     if (!decode) {
       // debugPrint('(http response) : $method ${request.url} ${request.headers} $body => $responseString');
-      debugPrint('(http response) : $method ${request.url} ${request.headers} => $responseString');
+      debugPrint(
+          '(http response) : $method ${request.url} ${request.headers} => $responseString');
       return responseString;
     }
 
     // debugPrint('(http response) : $method ${request.url} ${request.headers} $body => $responseString');
-    debugPrint('(http response) : $method ${request.url} ${request.headers} => $responseString');
+    debugPrint(
+        '(http response) : $method ${request.url} ${request.headers} => $responseString');
     return json.decode(responseString);
   }
 
@@ -74,19 +87,22 @@ final class ApiHelper {
     if (files != null) request.files.addAll(files);
     if (fields != null) request.fields.addAll(fields);
 
-    debugPrint('(http request) : ${request.method} ${request.url} ${request.headers} ${request.fields}');
+    debugPrint(
+        '(http request) : ${request.method} ${request.url} ${request.headers} ${request.fields}');
 
     http.StreamedResponse response;
     if (timeout == null) {
       response = await request.send();
     } else {
-      response = await request.send().timeout(timeout, onTimeout: _onRequestTimeout);
+      response =
+          await request.send().timeout(timeout, onTimeout: _onRequestTimeout);
     }
 
     if (response.statusCode != 200) {
       String responseString = await response.stream.bytesToString();
       // debugPrint('(http response) : $method ${request.url} ${request.headers} ${request.fields} => $responseString');
-      debugPrint('(http response) : $method ${request.url} ${request.headers} => $responseString');
+      debugPrint(
+          '(http response) : $method ${request.url} ${request.headers} => $responseString');
       throw {
         'data': json.decode(responseString),
         'status_code': response.statusCode,
@@ -95,7 +111,8 @@ final class ApiHelper {
 
     String responseString = await response.stream.bytesToString();
     // debugPrint('(http response) : $method ${request.url} ${request.headers} ${request.fields} => $responseString');
-    debugPrint('(http response) : $method ${request.url} ${request.headers} => $responseString');
+    debugPrint(
+        '(http response) : $method ${request.url} ${request.headers} => $responseString');
     return json.decode(responseString);
   }
 
@@ -104,19 +121,23 @@ final class ApiHelper {
       currentUser = User.fromJson(response['data']);
       if (currentUser!.foto != null) {
         try {
-          currentUser!.imageData = await getFile(uri: Uri.parse(currentUser!.foto!), timeout: const Duration(seconds: 10));
+          currentUser!.imageData = await getFile(
+              uri: Uri.parse(currentUser!.foto!),
+              timeout: const Duration(seconds: 10));
         } catch (e) {
           // Ignored, really
         }
       }
-      return;
+    } else {
+      // TODO: Uncomment below code for sign in with token
+      // try {
+      //   currentUser = await ApiHelper.get(pathUrl: dotenv.env['ENDPOINT_AUTH_USER']!).then((value) => User.fromJson(value['data']));
+      // } catch (e) {
+      //   ApiHelper.handleError(e);
+      // }
     }
 
-    // try {
-    //   currentUser = await ApiHelper.get(pathUrl: dotenv.env['ENDPOINT_AUTH_USER']!).then((value) => User.fromJson(value['data']));
-    // } catch (e) {
-    //   ApiHelper.handleError(e);
-    // }
+    MyApp.leaderboardBloc.add(InitializeLeaderboardData());
   }
 
   static Future<String?> _getToken({bool refreshCurrentUser = false}) async {
@@ -147,7 +168,8 @@ final class ApiHelper {
     return token;
   }
 
-  static Future<void> signIn({required String email, required String password}) async {
+  static Future<void> signIn(
+      {required String email, required String password}) async {
     dynamic response = await _request(
       method: 'POST',
       uri: Uri.parse('$_url/${dotenv.env['ENDPOINT_AUTH_LOGIN']}'),
@@ -167,7 +189,8 @@ final class ApiHelper {
     await _refreshCurrentUser(response);
   }
 
-  static Future<void> signInWithToken() async => _getToken(refreshCurrentUser: true);
+  static Future<void> signInWithToken() async =>
+      _getToken(refreshCurrentUser: true);
 
   static Future<void> signOut() async {
     try {
@@ -183,21 +206,42 @@ final class ApiHelper {
     while (NavigationHelper.canGoBack()) {
       NavigationHelper.back();
     }
-    NavigationHelper.toReplacement(MaterialPageRoute(builder: (context) => const SignInPage()));
+    NavigationHelper.toReplacement(
+        MaterialPageRoute(builder: (context) => const SignInPage()));
     await Future.delayed(const Duration(milliseconds: 300));
 
     // TODO: Set all bloc to initial
+    MyApp.leaderboardBloc.add(SetLeaderboardToInitial());
   }
 
-  static Future<dynamic> get({required String pathUrl}) => _request(method: 'GET', uri: Uri.parse('$_url/api/$pathUrl'));
+  static Future<dynamic> get({required String pathUrl}) =>
+      _request(method: 'GET', uri: Uri.parse('$_url/$pathUrl'));
 
-  static Future<dynamic> post({required String pathUrl, Map<String, dynamic>? body, bool ignoreAuthorization = false}) => _request(method: 'POST', uri: Uri.parse('$_url/api/$pathUrl'), body: body, ignoreAuthorization: ignoreAuthorization);
+  static Future<dynamic> post(
+          {required String pathUrl,
+          Map<String, dynamic>? body,
+          bool ignoreAuthorization = false}) =>
+      _request(
+          method: 'POST',
+          uri: Uri.parse('$_url/$pathUrl'),
+          body: body,
+          ignoreAuthorization: ignoreAuthorization);
 
-  static Future<dynamic> put({required String pathUrl, Map<String, dynamic>? body}) => _request(method: 'PUT', uri: Uri.parse('$_url/api/$pathUrl'), body: body);
+  static Future<dynamic> put(
+          {required String pathUrl, Map<String, dynamic>? body}) =>
+      _request(method: 'PUT', uri: Uri.parse('$_url/$pathUrl'), body: body);
 
-  static Future<dynamic> delete({required String pathUrl, Map<String, dynamic>? body}) => _request(method: 'DELETE', uri: Uri.parse('$_url/api/$pathUrl'), body: body);
+  static Future<dynamic> delete(
+          {required String pathUrl, Map<String, dynamic>? body}) =>
+      _request(method: 'DELETE', uri: Uri.parse('$_url/$pathUrl'), body: body);
 
-  static Future<dynamic> getFile({required Uri uri, Duration? timeout}) => _request(method: 'GET', uri: uri, decode: false, ignoreAuthorization: true, timeout: timeout);
+  static Future<dynamic> getFile({required Uri uri, Duration? timeout}) =>
+      _request(
+          method: 'GET',
+          uri: uri,
+          decode: false,
+          ignoreAuthorization: true,
+          timeout: timeout);
 
   static Future<dynamic> postMultipart({
     required String pathUrl,
@@ -215,31 +259,40 @@ final class ApiHelper {
 
   static Future<void> handleError(Object e) {
     if (e is Map && (e['status_code'] == 401 || e['status_code'] == 422)) {
-      if (e['data']['message'] is Map) return showErrorDialog(e['data']['message'].toString());
+      if (e['data']['message'] is Map)
+        return showErrorDialog(e['data']['message'].toString());
 
-      if (e['data']['message'] == 'The provided credentials are incorrect.') return showErrorDialog('Email atau Password salah');
+      if (e['data']['message'] == 'The provided credentials are incorrect.')
+        return showErrorDialog('Email atau Password salah');
 
       while (NavigationHelper.canGoBack()) {
         NavigationHelper.back();
       }
-      NavigationHelper.toReplacement(MaterialPageRoute(builder: (context) => const SignInPage()));
+      NavigationHelper.toReplacement(
+          MaterialPageRoute(builder: (context) => const SignInPage()));
 
       return showInformationDialog('Sesi Anda telah berakhir');
     }
 
-    if (e is Map && e['status_code'] == 404) return showErrorDialog('URL tidak ditemukan, silahkan update aplikasi');
+    if (e is Map && e['status_code'] == 404)
+      return showErrorDialog('URL tidak ditemukan, silahkan update aplikasi');
 
-    if (e is Map && e['status_code'] == 500) return showErrorDialog('Terjadi error di server');
+    if (e is Map && e['status_code'] == 500)
+      return showErrorDialog('Terjadi error di server');
 
     if (e is Map && e['data'] is Map && e['data']['message'] != null) {
-      if (e['data']['message'] is Map) return showErrorDialog(e['data']['message'].toString());
+      if (e['data']['message'] is Map)
+        return showErrorDialog(e['data']['message'].toString());
 
       return showErrorDialog(e['data']['message']);
     }
 
-    if (e is http.ClientException) return showErrorDialog('Gagal terhubung ke server, silahkan periksa koneksi internet Anda');
+    if (e is http.ClientException)
+      return showErrorDialog(
+          'Gagal terhubung ke server, silahkan periksa koneksi internet Anda');
 
-    if (e is FormatException) return showErrorDialog('${e.source}, ${e.message}');
+    if (e is FormatException)
+      return showErrorDialog('${e.source}, ${e.message}');
 
     return showErrorDialog(e.toString());
   }

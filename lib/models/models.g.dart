@@ -40,9 +40,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     };
 
 const _$UserRoleEnumMap = {
-  UserRole.remaja: 'Remaja',
   UserRole.mentor: 'Mentor',
-  UserRole.parent: 'Parent',
 };
 
 _$RemajaImpl _$$RemajaImplFromJson(Map<String, dynamic> json) => _$RemajaImpl(
@@ -92,32 +90,6 @@ Map<String, dynamic> _$$MentorImplToJson(_$MentorImpl instance) =>
       'nama': instance.nama,
       'gelar': instance.gelar,
       'riwayat_pendidikan_terakhir': instance.riwayatPendidikanTerakhir,
-      'role': instance.$type,
-    };
-
-_$OrangTuaImpl _$$OrangTuaImplFromJson(Map<String, dynamic> json) =>
-    _$OrangTuaImpl(
-      id: (json['id'] as num?)?.toInt(),
-      namaLengkap: json['nama_lengkap'] as String?,
-      kode: json['kode'] as String?,
-      userId: (json['user_id'] as num?)?.toInt(),
-      createdAt: json['created_at'] == null
-          ? null
-          : DateTime.parse(json['created_at'] as String),
-      updatedAt: json['updated_at'] == null
-          ? null
-          : DateTime.parse(json['updated_at'] as String),
-      $type: json['role'] as String?,
-    );
-
-Map<String, dynamic> _$$OrangTuaImplToJson(_$OrangTuaImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'nama_lengkap': instance.namaLengkap,
-      'kode': instance.kode,
-      'user_id': instance.userId,
-      'created_at': instance.createdAt?.toIso8601String(),
-      'updated_at': instance.updatedAt?.toIso8601String(),
       'role': instance.$type,
     };
 

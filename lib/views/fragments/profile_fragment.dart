@@ -20,10 +20,10 @@ class ProfileFragment extends StatelessWidget {
               image: const NetworkImage(kDummyPictureProfileUrl),
               borderRadius: BorderRadius.circular(24.0),
               extendedAppBar: AppBar(
-                title: Text('Guest'),
+                title: const Text('Guest'),
               ),
             ),
-            title: Text('Guest'),
+            title: const Text('Guest'),
             trailing: const Icon(Icons.chevron_right),
             iconColor: kColorWhite,
             textColor: kColorWhite,

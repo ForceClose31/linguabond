@@ -9,30 +9,12 @@ class HomeFragment extends StatelessWidget {
         children: [
           SizedBox(height: MediaQuery.viewPaddingOf(context).top),
           const SizedBox(height: 16.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IgnorePointer(
-                child: MyFilledButton.circle(
-                  radius: 40.0,
-                  padding: EdgeInsets.zero,
-                  pressedBottomBorderWidth: 0.0,
-                  onPressed: () {},
-                  image: const DecorationImage(
-                    image: NetworkImage(kDummyPictureProfileUrl),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16.0),
           Text('Selamat datang,Guest! 👋',
               style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 16.0),
           BannerContainer(
             // ignore: unnecessary_string_interpolations
-            title: Text('Guest'),
+            title: const Text('Guest'),
             subtitle: const Text('Bergabung pada 9 April 2024'),
             image: Image.asset('assets/images/profile-mentor.png'),
           ),
@@ -60,8 +42,7 @@ class HomeFragment extends StatelessWidget {
               Flexible(
                 child: MyFilledButton.tonal(
                   onPressed: () =>
-                      NavigationHelper.to(SlidePageRoute(
-                      pageBuilder: (context) => const DetailMeetPage())),
+                      homePageKey.currentState?.setSelectedIndex(1),
                   icon: SvgPicture.asset('assets/svgs/meet.svg'),
                   textStyle: Theme.of(context)
                       .textTheme
