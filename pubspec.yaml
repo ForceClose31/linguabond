@@ -5,43 +5,50 @@ version: 1.0.0+1
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
+
 dependencies:
   flutter:
     sdk: flutter
-  http: ^1.2.1
   flutter_bloc: ^8.1.5
-  
-  cupertino_icons: ^1.0.6
+  flutter_dotenv: ^5.1.0
+  flutter_sticky_header: ^0.6.5
+  flutter_svg: ^2.0.10+1
+  freezed_annotation: ^2.4.1
+  http: ^1.2.1
+  json_annotation: ^4.9.0
   linguabound_widget:
     git:
       url: https://github.com/BlastTea/linguabound_widget.git
-      ref: ae5caac799cd261176656299471403d42327fb70
+      ref: e4728c1f0a11eed4fe1c9cc9fc35909cf6940595
   m_widget:
     git:
       url: https://github.com/BlastTea/MWidget.git
       ref: b1191678af1bbefe4ffde909b42804708bb5ab17
-  flutter_svg: ^2.0.10+1
-  flutter_sticky_header: ^0.6.5
-  freezed_annotation: ^2.4.1
+  shared_preferences: ^2.2.3
+
 dev_dependencies:
+  build_runner: ^2.4.10
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  freezed: ^2.5.2
+  json_serializable: ^6.8.0
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
     - assets/svgs/
-    - .env
+    # - .env
   fonts:
     - family: FeatherBold
       fonts:
         - asset: packages/linguabound_widget/fonts/FeatherBold/FeatherBold.ttf
+
 flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/images/logo.png"
   adaptive_icon_background: "assets/images/logo-background.png"
   adaptive_icon_foreground: "assets/images/logo-foreground.png"
-

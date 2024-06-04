@@ -16,6 +16,6 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const LinguaboundMaterialApp(
         title: 'Linguabound',
-        home: const SignInPage(),
+        home: SignInPage(),
       );
 }

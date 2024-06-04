@@ -16,7 +16,6 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) => Scaffold(
         body: [
           const HomeFragment(),
-          const ExerciseFragment(),
           const MeetFragment(),
           const ProfileFragment(),
         ][_selectedIndex],
@@ -39,15 +38,7 @@ class HomePageState extends State<HomePage> {
                   width: 30.0,
                   height: 30.0,
                 ),
-                label: 'Home',
-              ),
-              MyNavigationDestination(
-                icon: SvgPicture.asset(
-                  'assets/svgs/exercise.svg',
-                  width: 30.0,
-                  height: 30.0,
-                ),
-                label: 'Exercise',
+                label: 'Beranda',
               ),
               MyNavigationDestination(
                 icon: SvgPicture.asset(
@@ -63,7 +54,7 @@ class HomePageState extends State<HomePage> {
                   width: 30.0,
                   height: 30.0,
                 ),
-                label: 'Profile',
+                label: 'Profil',
               ),
             ],
             selectedIndex: _selectedIndex,

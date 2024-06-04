@@ -24,55 +24,25 @@ class HomeFragment extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                children: [
-                  SvgPicture.asset('assets/svgs/fire.svg'),
-                  const SizedBox(width: 8.0),
-                  const Text('1 Star'),
-                  const SizedBox(width: 32.0),
-                  SvgPicture.asset('assets/svgs/exp.svg'),
-                  const SizedBox(width: 8.0),
-                  const Text('120 Exp'),
-                ],
-              ),
             ],
           ),
           const SizedBox(height: 16.0),
-          Text('Welcome, Altamis! 👋',
-              style: Theme.of(context).textTheme.headlineSmall),
+          Text('Selamat datang,Guest! 👋',
+              style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 16.0),
           BannerContainer(
-            title: const Text('10 on 1 Sessions'),
-            subtitle: const Text(
-                'Let\'s open up to the things that matter the most '),
-            actions: [
-              TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                child: Text(
-                  'Meet Now',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: kColorBorder),
-                ),
-              ),
-              const SizedBox(width: 8.0),
-              const Icon(
-                Icons.date_range_outlined,
-                color: kColorBorder,
-                size: 17.0,
-              )
-            ],
-            image: Image.asset('assets/images/Meetup Icon.png'),
+            // ignore: unnecessary_string_interpolations
+            title: Text('Guest'),
+            subtitle: const Text('Bergabung pada 9 April 2024'),
+            image: Image.asset('assets/images/profile-mentor.png'),
           ),
           const SizedBox(height: 16.0),
           Row(
             children: [
               Flexible(
                 child: MyFilledButton.tonal(
-                  onPressed: () =>
-                      homePageKey.currentState?.setSelectedIndex(1),
+                  onPressed: () => NavigationHelper.to(SlidePageRoute(
+                      pageBuilder: (context) => const LeaderboardPage())),
                   icon: SvgPicture.asset('assets/svgs/exercise.svg'),
                   textStyle: Theme.of(context)
                       .textTheme
@@ -83,14 +53,15 @@ class HomeFragment extends StatelessWidget {
                   minHorizontalPadding: 8.0,
                   pressedBottomBorderWidth: 0.0,
                   bottomBorderOnly: true,
-                  child: const Text('Exercise'),
+                  child: const Text('Leaderboard'),
                 ),
               ),
               const SizedBox(width: 16.0),
               Flexible(
                 child: MyFilledButton.tonal(
                   onPressed: () =>
-                      homePageKey.currentState?.setSelectedIndex(2),
+                      NavigationHelper.to(SlidePageRoute(
+                      pageBuilder: (context) => const DetailMeetPage())),
                   icon: SvgPicture.asset('assets/svgs/meet.svg'),
                   textStyle: Theme.of(context)
                       .textTheme
@@ -105,50 +76,6 @@ class HomeFragment extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-          const SizedBox(height: 16.0),
-          Text('Cek Leaderboard',
-              style: Theme.of(context).textTheme.headlineMedium),
-          const SizedBox(height: 16.0),
-          MyFilledButton.tonal(
-            onPressed: () => NavigationHelper.to(SlidePageRoute(
-                pageBuilder: (context) => const LeaderboardPage())),
-            icon: SvgPicture.asset('assets/svgs/chest.svg'),
-            padding: const EdgeInsets.all(16.0),
-            borderColor: kColorBorder,
-            minHorizontalPadding: 16.0,
-            pressedBottomBorderWidth: 0.0,
-            bottomBorderOnly: true,
-            child: SizedBox(
-              width: MediaQuery.sizeOf(context).width - 32.0 - 100.0,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        'Leaderboard kamu!',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge
-                            ?.copyWith(color: kColorBorder),
-                      ),
-                      const SizedBox(width: 8.0),
-                      const Icon(Icons.arrow_forward, color: kColorBorder),
-                    ],
-                  ),
-                  const SizedBox(height: 8.0),
-                  Text(
-                    'You\'ve Reached a Great Milestone! Celebrate Your Victory.',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .copyWith(color: kColorBorder),
-                    textAlign: TextAlign.start,
-                  ),
-                ],
-              ),
-            ),
           ),
           const SizedBox(height: 16.0),
           Text('Yuk, belajar bareng kita!',
