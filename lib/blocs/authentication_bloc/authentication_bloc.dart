@@ -46,9 +46,6 @@ class AuthenticationBloc
           SlidePageRoute(pageBuilder: (context) => const HomePage()));
     });
 
-    on<SignUpPressed>((event, emit) async {
-      // TODO: implement sign up
-    });
   }
 
   static final TextEditingController _textControllerEmail =
