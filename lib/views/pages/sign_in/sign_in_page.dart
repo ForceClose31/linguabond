@@ -4,51 +4,84 @@ class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Image.asset('assets/images/logo.png'),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Masukkan email',
+  Widget build(BuildContext context) =>
+      BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, stateAuthentication) {
+          stateAuthentication as AuthenticationDataLoaded;
+
+          if (kDebugMode) {
+            stateAuthentication.textControllerEmail.text =
+                "";
+            stateAuthentication.textControllerPassword.text =
+                "";
+
+          }
+
+          return Scaffold(
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(height: 128.0),
+                    Center(
+                      child: Text(
+                        'Yuk, mulai masuk!',
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
                     ),
-                    textInputAction: TextInputAction.next,
-                  ),
-                ),
-                const SizedBox(height: 24.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      labelText: 'Masukkan kata sandi',
+                    const SizedBox(height: 64.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: TextField(
+                        controller: stateAuthentication.textControllerEmail,
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                        ),
+                        textInputAction: TextInputAction.next,
+                      ),
                     ),
-                    textInputAction: TextInputAction.next,
-                    onEditingComplete: () => NavigationHelper.to(SlidePageRoute(
-                        pageBuilder: (context) => const HomePage())),
-                  ),
+                    const SizedBox(height: 24.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: TextField(
+                        controller: stateAuthentication.textControllerPassword,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          suffixIcon: IconButton(
+                            onPressed: () => MyApp.authenticationBloc.add(
+                                SetLoginPasswordVisible(
+                                    value: !stateAuthentication
+                                        .isPasswordVisible)),
+                            icon: Icon(!stateAuthentication.isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                          ),
+                        ),
+                        obscureText: !stateAuthentication.isPasswordVisible,
+                        onEditingComplete: () =>
+                            MyApp.authenticationBloc.add(SignInPressed()),
+                      ),
+                    ),
+                    const SizedBox(height: 24.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: MyFilledButton(
+                        onPressed: () =>
+                            MyApp.authenticationBloc.add(SignInPressed()),
+                        child: const Text('Masuk'),
+                      ),
+                    ),
+                    // TODO: Implement forgot password
+                    // TextButton(
+                    //   onPressed: () => NavigationHelper.to(SlidePageRoute(pageBuilder: (context) => const SignInPage())),
+                    //   child: const Text('Lupa password?'),
+                    // ),
+                  ],
                 ),
-                const SizedBox(height: 24.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: MyFilledButton(
-                    onPressed: () => NavigationHelper.to(SlidePageRoute(
-                        pageBuilder: (context) => const HomePage())),
-                    child: const Text('Masuk'),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => NavigationHelper.to(SlidePageRoute(
-                      pageBuilder: (context) => const SignInPage())),
-                  child: const Text('Lupa kata sandi?'),
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       );
 }

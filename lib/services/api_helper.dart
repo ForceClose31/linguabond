@@ -119,10 +119,10 @@ final class ApiHelper {
   static Future<void> _refreshCurrentUser(dynamic response) async {
     if (response != null) {
       currentUser = User.fromJson(response['data']);
-      if (currentUser.foto != null) {
+      if (currentUser!.foto != null) {
         try {
-          currentUser.imageData = await getFile(
-              uri: Uri.parse(currentUser.foto!),
+          currentUser!.imageData = await getFile(
+              uri: Uri.parse(currentUser!.foto!),
               timeout: const Duration(seconds: 10));
         } catch (e) {
           // Ignored, really
@@ -259,13 +259,11 @@ final class ApiHelper {
 
   static Future<void> handleError(Object e) {
     if (e is Map && (e['status_code'] == 401 || e['status_code'] == 422)) {
-      if (e['data']['message'] is Map) {
+      if (e['data']['message'] is Map)
         return showErrorDialog(e['data']['message'].toString());
-      }
 
-      if (e['data']['message'] == 'The provided credentials are incorrect.') {
+      if (e['data']['message'] == 'The provided credentials are incorrect.')
         return showErrorDialog('Email atau Password salah');
-      }
 
       while (NavigationHelper.canGoBack()) {
         NavigationHelper.back();
@@ -276,30 +274,25 @@ final class ApiHelper {
       return showInformationDialog('Sesi Anda telah berakhir');
     }
 
-    if (e is Map && e['status_code'] == 404) {
+    if (e is Map && e['status_code'] == 404)
       return showErrorDialog('URL tidak ditemukan, silahkan update aplikasi');
-    }
 
-    if (e is Map && e['status_code'] == 500) {
+    if (e is Map && e['status_code'] == 500)
       return showErrorDialog('Terjadi error di server');
-    }
 
     if (e is Map && e['data'] is Map && e['data']['message'] != null) {
-      if (e['data']['message'] is Map) {
+      if (e['data']['message'] is Map)
         return showErrorDialog(e['data']['message'].toString());
-      }
 
       return showErrorDialog(e['data']['message']);
     }
 
-    if (e is http.ClientException) {
+    if (e is http.ClientException)
       return showErrorDialog(
           'Gagal terhubung ke server, silahkan periksa koneksi internet Anda');
-    }
 
-    if (e is FormatException) {
+    if (e is FormatException)
       return showErrorDialog('${e.source}, ${e.message}');
-    }
 
     return showErrorDialog(e.toString());
   }

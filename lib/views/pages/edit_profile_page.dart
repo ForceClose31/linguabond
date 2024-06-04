@@ -79,7 +79,7 @@ class EditProfilePage extends StatelessWidget {
                 sliver: SliverToBoxAdapter(
                   child: TextField(
                     controller:
-                        TextEditingController(text: 'Altamis Fattah Atmaja'),
+                        TextEditingController(text: currentUser?.name ?? 'Guest'),
                     decoration: const InputDecoration(
                       labelText: 'Nama',
                     ),
@@ -94,7 +94,7 @@ class EditProfilePage extends StatelessWidget {
                 sliver: SliverToBoxAdapter(
                   child: TextField(
                     controller: TextEditingController(
-                        text: 'altamisfattah16@gmail.com'),
+                        text: currentUser?.email ?? 'Guest'),
                     decoration: const InputDecoration(
                       labelText: 'Email',
                     ),
@@ -108,9 +108,23 @@ class EditProfilePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 sliver: SliverToBoxAdapter(
                   child: TextField(
-                    controller: TextEditingController(text: 'altamisatmaja'),
+                    controller: TextEditingController(text: currentUser?.detail?.mapOrNull(mentor: (value) => value.gelar,) ?? 'Guest'),
                     decoration: const InputDecoration(
-                      labelText: 'Username',
+                      labelText: 'Gelar',
+                    ),
+                    textInputAction: TextInputAction.next,
+                    autofillHints: const [AutofillHints.username],
+                  ),
+                ),
+              ),
+              const SliverToBoxAdapter(child: SizedBox(height: 16.0)),
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                sliver: SliverToBoxAdapter(
+                  child: TextField(
+                    controller: TextEditingController(text: currentUser?.detail?.mapOrNull(mentor: (value) => value.riwayatPendidikanTerakhir,) ?? 'Guest'),
+                    decoration: const InputDecoration(
+                      labelText: 'Riwayat Pendidikan Terakhir',
                     ),
                     textInputAction: TextInputAction.next,
                     autofillHints: const [AutofillHints.username],

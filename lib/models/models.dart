@@ -5,10 +5,16 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'models.g.dart';
 part 'models.freezed.dart';
 
+int? _parseInt(dynamic value) => value is String? && value != null
+    ? int.tryParse(value)
+    : value is int
+        ? value
+        : null;
+
 @unfreezed
 class User with _$User {
   factory User({
-    int? id,
+    @JsonKey(fromJson: _parseInt) int? id,
     String? name,
     String? email,
     @JsonKey(name: 'email_verified_at') DateTime? emailVerifiedAt,
@@ -32,11 +38,11 @@ class User with _$User {
 sealed class UserDetail with _$UserDetail {
   @FreezedUnionValue('Remaja')
   factory UserDetail.remaja({
-    int? id,
+    @JsonKey(fromJson: _parseInt) int? id,
     @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-    int? exp,
-    int? star,
-    int? level,
+    @JsonKey(fromJson: _parseInt) int? exp,
+    @JsonKey(fromJson: _parseInt) int? star,
+    @JsonKey(fromJson: _parseInt) int? level,
     @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
     @JsonKey(name: 'user_id') int? userId,
     String? username,
@@ -53,7 +59,6 @@ sealed class UserDetail with _$UserDetail {
     String? riwayatPendidikanTerakhir,
   }) = Mentor;
 
-
   factory UserDetail.fromJson(Map<String, dynamic> json) =>
       _$UserDetailFromJson(json);
 }
@@ -61,11 +66,11 @@ sealed class UserDetail with _$UserDetail {
 @freezed
 class Leaderboard with _$Leaderboard {
   factory Leaderboard({
-    int? id,
-    @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-    int? exp,
-    int? star,
-    int? level,
+    @JsonKey(fromJson: _parseInt) int? id,
+    String? name,
+    @JsonKey(fromJson: _parseInt) int? exp,
+    @JsonKey(fromJson: _parseInt) int? star,
+    @JsonKey(fromJson: _parseInt) int? level,
     @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
     @JsonKey(name: 'user_id') int? userId,
     String? username,
@@ -81,4 +86,25 @@ class Leaderboard with _$Leaderboard {
 enum UserRole {
   @JsonValue('Mentor')
   mentor,
+}
+
+@freezed
+class Meet with _$Meet {
+  factory Meet({
+    @JsonKey(fromJson: _parseInt) int? id,
+    String? topik,
+    String? deskripsi,
+    @JsonKey(name: 'jam_mulai') DateTime? jamMulai,
+    @JsonKey(name: 'jam_berakhir') DateTime? jamBerakhir,
+    DateTime? tanggal,
+    String? link,
+    String? materi,
+    @JsonKey(name: 'total_remaja', fromJson: _parseInt) int? totalRemaja,
+    @JsonKey(name: 'mentor_id', fromJson: _parseInt) int? mentorId,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
+    @JsonKey(name: 'updated_at') DateTime? updatedAt,
+    String? status,
+  }) = _Meet;
+
+  factory Meet.fromJson(Map<String, dynamic> json) => _$MeetFromJson(json);
 }

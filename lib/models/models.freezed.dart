@@ -20,7 +20,9 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
+  @JsonKey(fromJson: _parseInt)
   int? get id => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _parseInt)
   set id(int? value) => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   set name(String? value) => throw _privateConstructorUsedError;
@@ -60,7 +62,7 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {int? id,
+      {@JsonKey(fromJson: _parseInt) int? id,
       String? name,
       String? email,
       @JsonKey(name: 'email_verified_at') DateTime? emailVerifiedAt,
@@ -164,7 +166,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id,
+      {@JsonKey(fromJson: _parseInt) int? id,
       String? name,
       String? email,
       @JsonKey(name: 'email_verified_at') DateTime? emailVerifiedAt,
@@ -250,7 +252,7 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   _$UserImpl(
-      {this.id,
+      {@JsonKey(fromJson: _parseInt) this.id,
       this.name,
       this.email,
       @JsonKey(name: 'email_verified_at') this.emailVerifiedAt,
@@ -265,6 +267,7 @@ class _$UserImpl implements _User {
       _$$UserImplFromJson(json);
 
   @override
+  @JsonKey(fromJson: _parseInt)
   int? id;
   @override
   String? name;
@@ -310,7 +313,7 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   factory _User(
-      {int? id,
+      {@JsonKey(fromJson: _parseInt) int? id,
       String? name,
       String? email,
       @JsonKey(name: 'email_verified_at') DateTime? emailVerifiedAt,
@@ -325,7 +328,9 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
+  @JsonKey(fromJson: _parseInt)
   int? get id;
+  @JsonKey(fromJson: _parseInt)
   set id(int? value);
   @override
   String? get name;
@@ -386,11 +391,11 @@ mixin _$UserDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            int? id,
+            @JsonKey(fromJson: _parseInt) int? id,
             @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-            int? exp,
-            int? star,
-            int? level,
+            @JsonKey(fromJson: _parseInt) int? exp,
+            @JsonKey(fromJson: _parseInt) int? star,
+            @JsonKey(fromJson: _parseInt) int? level,
             @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
             @JsonKey(name: 'user_id') int? userId,
             String? username,
@@ -409,11 +414,11 @@ mixin _$UserDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            int? id,
+            @JsonKey(fromJson: _parseInt) int? id,
             @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-            int? exp,
-            int? star,
-            int? level,
+            @JsonKey(fromJson: _parseInt) int? exp,
+            @JsonKey(fromJson: _parseInt) int? star,
+            @JsonKey(fromJson: _parseInt) int? level,
             @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
             @JsonKey(name: 'user_id') int? userId,
             String? username,
@@ -432,11 +437,11 @@ mixin _$UserDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            int? id,
+            @JsonKey(fromJson: _parseInt) int? id,
             @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-            int? exp,
-            int? star,
-            int? level,
+            @JsonKey(fromJson: _parseInt) int? exp,
+            @JsonKey(fromJson: _parseInt) int? star,
+            @JsonKey(fromJson: _parseInt) int? level,
             @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
             @JsonKey(name: 'user_id') int? userId,
             String? username,
@@ -500,11 +505,11 @@ abstract class _$$RemajaImplCopyWith<$Res> {
       __$$RemajaImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {int? id,
+      {@JsonKey(fromJson: _parseInt) int? id,
       @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-      int? exp,
-      int? star,
-      int? level,
+      @JsonKey(fromJson: _parseInt) int? exp,
+      @JsonKey(fromJson: _parseInt) int? star,
+      @JsonKey(fromJson: _parseInt) int? level,
       @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
       @JsonKey(name: 'user_id') int? userId,
       String? username,
@@ -589,11 +594,11 @@ class __$$RemajaImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RemajaImpl implements Remaja {
   _$RemajaImpl(
-      {this.id,
+      {@JsonKey(fromJson: _parseInt) this.id,
       @JsonKey(name: 'nama_orang_tua') this.namaOrangTua,
-      this.exp,
-      this.star,
-      this.level,
+      @JsonKey(fromJson: _parseInt) this.exp,
+      @JsonKey(fromJson: _parseInt) this.star,
+      @JsonKey(fromJson: _parseInt) this.level,
       @JsonKey(name: 'kode_orang_tua') this.kodeOrangTua,
       @JsonKey(name: 'user_id') this.userId,
       this.username,
@@ -607,15 +612,19 @@ class _$RemajaImpl implements Remaja {
       _$$RemajaImplFromJson(json);
 
   @override
+  @JsonKey(fromJson: _parseInt)
   int? id;
   @override
   @JsonKey(name: 'nama_orang_tua')
   String? namaOrangTua;
   @override
+  @JsonKey(fromJson: _parseInt)
   int? exp;
   @override
+  @JsonKey(fromJson: _parseInt)
   int? star;
   @override
+  @JsonKey(fromJson: _parseInt)
   int? level;
   @override
   @JsonKey(name: 'kode_orang_tua')
@@ -653,11 +662,11 @@ class _$RemajaImpl implements Remaja {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            int? id,
+            @JsonKey(fromJson: _parseInt) int? id,
             @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-            int? exp,
-            int? star,
-            int? level,
+            @JsonKey(fromJson: _parseInt) int? exp,
+            @JsonKey(fromJson: _parseInt) int? star,
+            @JsonKey(fromJson: _parseInt) int? level,
             @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
             @JsonKey(name: 'user_id') int? userId,
             String? username,
@@ -680,11 +689,11 @@ class _$RemajaImpl implements Remaja {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            int? id,
+            @JsonKey(fromJson: _parseInt) int? id,
             @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-            int? exp,
-            int? star,
-            int? level,
+            @JsonKey(fromJson: _parseInt) int? exp,
+            @JsonKey(fromJson: _parseInt) int? star,
+            @JsonKey(fromJson: _parseInt) int? level,
             @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
             @JsonKey(name: 'user_id') int? userId,
             String? username,
@@ -707,11 +716,11 @@ class _$RemajaImpl implements Remaja {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            int? id,
+            @JsonKey(fromJson: _parseInt) int? id,
             @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-            int? exp,
-            int? star,
-            int? level,
+            @JsonKey(fromJson: _parseInt) int? exp,
+            @JsonKey(fromJson: _parseInt) int? star,
+            @JsonKey(fromJson: _parseInt) int? level,
             @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
             @JsonKey(name: 'user_id') int? userId,
             String? username,
@@ -775,11 +784,11 @@ class _$RemajaImpl implements Remaja {
 
 abstract class Remaja implements UserDetail {
   factory Remaja(
-      {int? id,
+      {@JsonKey(fromJson: _parseInt) int? id,
       @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-      int? exp,
-      int? star,
-      int? level,
+      @JsonKey(fromJson: _parseInt) int? exp,
+      @JsonKey(fromJson: _parseInt) int? star,
+      @JsonKey(fromJson: _parseInt) int? level,
       @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
       @JsonKey(name: 'user_id') int? userId,
       String? username,
@@ -789,17 +798,25 @@ abstract class Remaja implements UserDetail {
 
   factory Remaja.fromJson(Map<String, dynamic> json) = _$RemajaImpl.fromJson;
 
+  @JsonKey(fromJson: _parseInt)
   int? get id;
+  @JsonKey(fromJson: _parseInt)
   set id(int? value);
   @JsonKey(name: 'nama_orang_tua')
   String? get namaOrangTua;
   @JsonKey(name: 'nama_orang_tua')
   set namaOrangTua(String? value);
+  @JsonKey(fromJson: _parseInt)
   int? get exp;
+  @JsonKey(fromJson: _parseInt)
   set exp(int? value);
+  @JsonKey(fromJson: _parseInt)
   int? get star;
+  @JsonKey(fromJson: _parseInt)
   set star(int? value);
+  @JsonKey(fromJson: _parseInt)
   int? get level;
+  @JsonKey(fromJson: _parseInt)
   set level(int? value);
   @JsonKey(name: 'kode_orang_tua')
   String? get kodeOrangTua;
@@ -913,11 +930,11 @@ class _$MentorImpl implements Mentor {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            int? id,
+            @JsonKey(fromJson: _parseInt) int? id,
             @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-            int? exp,
-            int? star,
-            int? level,
+            @JsonKey(fromJson: _parseInt) int? exp,
+            @JsonKey(fromJson: _parseInt) int? star,
+            @JsonKey(fromJson: _parseInt) int? level,
             @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
             @JsonKey(name: 'user_id') int? userId,
             String? username,
@@ -939,11 +956,11 @@ class _$MentorImpl implements Mentor {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            int? id,
+            @JsonKey(fromJson: _parseInt) int? id,
             @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-            int? exp,
-            int? star,
-            int? level,
+            @JsonKey(fromJson: _parseInt) int? exp,
+            @JsonKey(fromJson: _parseInt) int? star,
+            @JsonKey(fromJson: _parseInt) int? level,
             @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
             @JsonKey(name: 'user_id') int? userId,
             String? username,
@@ -965,11 +982,11 @@ class _$MentorImpl implements Mentor {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(
-            int? id,
+            @JsonKey(fromJson: _parseInt) int? id,
             @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-            int? exp,
-            int? star,
-            int? level,
+            @JsonKey(fromJson: _parseInt) int? exp,
+            @JsonKey(fromJson: _parseInt) int? star,
+            @JsonKey(fromJson: _parseInt) int? level,
             @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
             @JsonKey(name: 'user_id') int? userId,
             String? username,
@@ -1058,11 +1075,14 @@ Leaderboard _$LeaderboardFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Leaderboard {
+  @JsonKey(fromJson: _parseInt)
   int? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'nama_orang_tua')
-  String? get namaOrangTua => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _parseInt)
   int? get exp => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _parseInt)
   int? get star => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _parseInt)
   int? get level => throw _privateConstructorUsedError;
   @JsonKey(name: 'kode_orang_tua')
   String? get kodeOrangTua => throw _privateConstructorUsedError;
@@ -1089,11 +1109,11 @@ abstract class $LeaderboardCopyWith<$Res> {
       _$LeaderboardCopyWithImpl<$Res, Leaderboard>;
   @useResult
   $Res call(
-      {int? id,
-      @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-      int? exp,
-      int? star,
-      int? level,
+      {@JsonKey(fromJson: _parseInt) int? id,
+      String? name,
+      @JsonKey(fromJson: _parseInt) int? exp,
+      @JsonKey(fromJson: _parseInt) int? star,
+      @JsonKey(fromJson: _parseInt) int? level,
       @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
       @JsonKey(name: 'user_id') int? userId,
       String? username,
@@ -1116,7 +1136,7 @@ class _$LeaderboardCopyWithImpl<$Res, $Val extends Leaderboard>
   @override
   $Res call({
     Object? id = freezed,
-    Object? namaOrangTua = freezed,
+    Object? name = freezed,
     Object? exp = freezed,
     Object? star = freezed,
     Object? level = freezed,
@@ -1132,9 +1152,9 @@ class _$LeaderboardCopyWithImpl<$Res, $Val extends Leaderboard>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      namaOrangTua: freezed == namaOrangTua
-          ? _value.namaOrangTua
-          : namaOrangTua // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       exp: freezed == exp
           ? _value.exp
@@ -1185,11 +1205,11 @@ abstract class _$$LeaderboardImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
-      @JsonKey(name: 'nama_orang_tua') String? namaOrangTua,
-      int? exp,
-      int? star,
-      int? level,
+      {@JsonKey(fromJson: _parseInt) int? id,
+      String? name,
+      @JsonKey(fromJson: _parseInt) int? exp,
+      @JsonKey(fromJson: _parseInt) int? star,
+      @JsonKey(fromJson: _parseInt) int? level,
       @JsonKey(name: 'kode_orang_tua') String? kodeOrangTua,
       @JsonKey(name: 'user_id') int? userId,
       String? username,
@@ -1210,7 +1230,7 @@ class __$$LeaderboardImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? namaOrangTua = freezed,
+    Object? name = freezed,
     Object? exp = freezed,
     Object? star = freezed,
     Object? level = freezed,
@@ -1226,9 +1246,9 @@ class __$$LeaderboardImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      namaOrangTua: freezed == namaOrangTua
-          ? _value.namaOrangTua
-          : namaOrangTua // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       exp: freezed == exp
           ? _value.exp
@@ -1274,11 +1294,11 @@ class __$$LeaderboardImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LeaderboardImpl implements _Leaderboard {
   _$LeaderboardImpl(
-      {this.id,
-      @JsonKey(name: 'nama_orang_tua') this.namaOrangTua,
-      this.exp,
-      this.star,
-      this.level,
+      {@JsonKey(fromJson: _parseInt) this.id,
+      this.name,
+      @JsonKey(fromJson: _parseInt) this.exp,
+      @JsonKey(fromJson: _parseInt) this.star,
+      @JsonKey(fromJson: _parseInt) this.level,
       @JsonKey(name: 'kode_orang_tua') this.kodeOrangTua,
       @JsonKey(name: 'user_id') this.userId,
       this.username,
@@ -1290,15 +1310,18 @@ class _$LeaderboardImpl implements _Leaderboard {
       _$$LeaderboardImplFromJson(json);
 
   @override
+  @JsonKey(fromJson: _parseInt)
   final int? id;
   @override
-  @JsonKey(name: 'nama_orang_tua')
-  final String? namaOrangTua;
+  final String? name;
   @override
+  @JsonKey(fromJson: _parseInt)
   final int? exp;
   @override
+  @JsonKey(fromJson: _parseInt)
   final int? star;
   @override
+  @JsonKey(fromJson: _parseInt)
   final int? level;
   @override
   @JsonKey(name: 'kode_orang_tua')
@@ -1320,7 +1343,7 @@ class _$LeaderboardImpl implements _Leaderboard {
 
   @override
   String toString() {
-    return 'Leaderboard(id: $id, namaOrangTua: $namaOrangTua, exp: $exp, star: $star, level: $level, kodeOrangTua: $kodeOrangTua, userId: $userId, username: $username, orangTuaId: $orangTuaId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Leaderboard(id: $id, name: $name, exp: $exp, star: $star, level: $level, kodeOrangTua: $kodeOrangTua, userId: $userId, username: $username, orangTuaId: $orangTuaId, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -1329,8 +1352,7 @@ class _$LeaderboardImpl implements _Leaderboard {
         (other.runtimeType == runtimeType &&
             other is _$LeaderboardImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.namaOrangTua, namaOrangTua) ||
-                other.namaOrangTua == namaOrangTua) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.exp, exp) || other.exp == exp) &&
             (identical(other.star, star) || other.star == star) &&
             (identical(other.level, level) || other.level == level) &&
@@ -1349,8 +1371,8 @@ class _$LeaderboardImpl implements _Leaderboard {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, namaOrangTua, exp, star,
-      level, kodeOrangTua, userId, username, orangTuaId, createdAt, updatedAt);
+  int get hashCode => Object.hash(runtimeType, id, name, exp, star, level,
+      kodeOrangTua, userId, username, orangTuaId, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -1368,11 +1390,11 @@ class _$LeaderboardImpl implements _Leaderboard {
 
 abstract class _Leaderboard implements Leaderboard {
   factory _Leaderboard(
-          {final int? id,
-          @JsonKey(name: 'nama_orang_tua') final String? namaOrangTua,
-          final int? exp,
-          final int? star,
-          final int? level,
+          {@JsonKey(fromJson: _parseInt) final int? id,
+          final String? name,
+          @JsonKey(fromJson: _parseInt) final int? exp,
+          @JsonKey(fromJson: _parseInt) final int? star,
+          @JsonKey(fromJson: _parseInt) final int? level,
           @JsonKey(name: 'kode_orang_tua') final String? kodeOrangTua,
           @JsonKey(name: 'user_id') final int? userId,
           final String? username,
@@ -1385,15 +1407,18 @@ abstract class _Leaderboard implements Leaderboard {
       _$LeaderboardImpl.fromJson;
 
   @override
+  @JsonKey(fromJson: _parseInt)
   int? get id;
   @override
-  @JsonKey(name: 'nama_orang_tua')
-  String? get namaOrangTua;
+  String? get name;
   @override
+  @JsonKey(fromJson: _parseInt)
   int? get exp;
   @override
+  @JsonKey(fromJson: _parseInt)
   int? get star;
   @override
+  @JsonKey(fromJson: _parseInt)
   int? get level;
   @override
   @JsonKey(name: 'kode_orang_tua')
@@ -1415,5 +1440,423 @@ abstract class _Leaderboard implements Leaderboard {
   @override
   @JsonKey(ignore: true)
   _$$LeaderboardImplCopyWith<_$LeaderboardImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Meet _$MeetFromJson(Map<String, dynamic> json) {
+  return _Meet.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Meet {
+  @JsonKey(fromJson: _parseInt)
+  int? get id => throw _privateConstructorUsedError;
+  String? get topik => throw _privateConstructorUsedError;
+  String? get deskripsi => throw _privateConstructorUsedError;
+  @JsonKey(name: 'jam_mulai')
+  DateTime? get jamMulai => throw _privateConstructorUsedError;
+  @JsonKey(name: 'jam_berakhir')
+  DateTime? get jamBerakhir => throw _privateConstructorUsedError;
+  DateTime? get tanggal => throw _privateConstructorUsedError;
+  String? get link => throw _privateConstructorUsedError;
+  String? get materi => throw _privateConstructorUsedError;
+  @JsonKey(name: 'total_remaja', fromJson: _parseInt)
+  int? get totalRemaja => throw _privateConstructorUsedError;
+  @JsonKey(name: 'mentor_id', fromJson: _parseInt)
+  int? get mentorId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MeetCopyWith<Meet> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MeetCopyWith<$Res> {
+  factory $MeetCopyWith(Meet value, $Res Function(Meet) then) =
+      _$MeetCopyWithImpl<$Res, Meet>;
+  @useResult
+  $Res call(
+      {@JsonKey(fromJson: _parseInt) int? id,
+      String? topik,
+      String? deskripsi,
+      @JsonKey(name: 'jam_mulai') DateTime? jamMulai,
+      @JsonKey(name: 'jam_berakhir') DateTime? jamBerakhir,
+      DateTime? tanggal,
+      String? link,
+      String? materi,
+      @JsonKey(name: 'total_remaja', fromJson: _parseInt) int? totalRemaja,
+      @JsonKey(name: 'mentor_id', fromJson: _parseInt) int? mentorId,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt,
+      String? status});
+}
+
+/// @nodoc
+class _$MeetCopyWithImpl<$Res, $Val extends Meet>
+    implements $MeetCopyWith<$Res> {
+  _$MeetCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? topik = freezed,
+    Object? deskripsi = freezed,
+    Object? jamMulai = freezed,
+    Object? jamBerakhir = freezed,
+    Object? tanggal = freezed,
+    Object? link = freezed,
+    Object? materi = freezed,
+    Object? totalRemaja = freezed,
+    Object? mentorId = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? status = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      topik: freezed == topik
+          ? _value.topik
+          : topik // ignore: cast_nullable_to_non_nullable
+              as String?,
+      deskripsi: freezed == deskripsi
+          ? _value.deskripsi
+          : deskripsi // ignore: cast_nullable_to_non_nullable
+              as String?,
+      jamMulai: freezed == jamMulai
+          ? _value.jamMulai
+          : jamMulai // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      jamBerakhir: freezed == jamBerakhir
+          ? _value.jamBerakhir
+          : jamBerakhir // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      tanggal: freezed == tanggal
+          ? _value.tanggal
+          : tanggal // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      link: freezed == link
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String?,
+      materi: freezed == materi
+          ? _value.materi
+          : materi // ignore: cast_nullable_to_non_nullable
+              as String?,
+      totalRemaja: freezed == totalRemaja
+          ? _value.totalRemaja
+          : totalRemaja // ignore: cast_nullable_to_non_nullable
+              as int?,
+      mentorId: freezed == mentorId
+          ? _value.mentorId
+          : mentorId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$MeetImplCopyWith<$Res> implements $MeetCopyWith<$Res> {
+  factory _$$MeetImplCopyWith(
+          _$MeetImpl value, $Res Function(_$MeetImpl) then) =
+      __$$MeetImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(fromJson: _parseInt) int? id,
+      String? topik,
+      String? deskripsi,
+      @JsonKey(name: 'jam_mulai') DateTime? jamMulai,
+      @JsonKey(name: 'jam_berakhir') DateTime? jamBerakhir,
+      DateTime? tanggal,
+      String? link,
+      String? materi,
+      @JsonKey(name: 'total_remaja', fromJson: _parseInt) int? totalRemaja,
+      @JsonKey(name: 'mentor_id', fromJson: _parseInt) int? mentorId,
+      @JsonKey(name: 'created_at') DateTime? createdAt,
+      @JsonKey(name: 'updated_at') DateTime? updatedAt,
+      String? status});
+}
+
+/// @nodoc
+class __$$MeetImplCopyWithImpl<$Res>
+    extends _$MeetCopyWithImpl<$Res, _$MeetImpl>
+    implements _$$MeetImplCopyWith<$Res> {
+  __$$MeetImplCopyWithImpl(_$MeetImpl _value, $Res Function(_$MeetImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? topik = freezed,
+    Object? deskripsi = freezed,
+    Object? jamMulai = freezed,
+    Object? jamBerakhir = freezed,
+    Object? tanggal = freezed,
+    Object? link = freezed,
+    Object? materi = freezed,
+    Object? totalRemaja = freezed,
+    Object? mentorId = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+    Object? status = freezed,
+  }) {
+    return _then(_$MeetImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      topik: freezed == topik
+          ? _value.topik
+          : topik // ignore: cast_nullable_to_non_nullable
+              as String?,
+      deskripsi: freezed == deskripsi
+          ? _value.deskripsi
+          : deskripsi // ignore: cast_nullable_to_non_nullable
+              as String?,
+      jamMulai: freezed == jamMulai
+          ? _value.jamMulai
+          : jamMulai // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      jamBerakhir: freezed == jamBerakhir
+          ? _value.jamBerakhir
+          : jamBerakhir // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      tanggal: freezed == tanggal
+          ? _value.tanggal
+          : tanggal // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      link: freezed == link
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String?,
+      materi: freezed == materi
+          ? _value.materi
+          : materi // ignore: cast_nullable_to_non_nullable
+              as String?,
+      totalRemaja: freezed == totalRemaja
+          ? _value.totalRemaja
+          : totalRemaja // ignore: cast_nullable_to_non_nullable
+              as int?,
+      mentorId: freezed == mentorId
+          ? _value.mentorId
+          : mentorId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$MeetImpl implements _Meet {
+  _$MeetImpl(
+      {@JsonKey(fromJson: _parseInt) this.id,
+      this.topik,
+      this.deskripsi,
+      @JsonKey(name: 'jam_mulai') this.jamMulai,
+      @JsonKey(name: 'jam_berakhir') this.jamBerakhir,
+      this.tanggal,
+      this.link,
+      this.materi,
+      @JsonKey(name: 'total_remaja', fromJson: _parseInt) this.totalRemaja,
+      @JsonKey(name: 'mentor_id', fromJson: _parseInt) this.mentorId,
+      @JsonKey(name: 'created_at') this.createdAt,
+      @JsonKey(name: 'updated_at') this.updatedAt,
+      this.status});
+
+  factory _$MeetImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MeetImplFromJson(json);
+
+  @override
+  @JsonKey(fromJson: _parseInt)
+  final int? id;
+  @override
+  final String? topik;
+  @override
+  final String? deskripsi;
+  @override
+  @JsonKey(name: 'jam_mulai')
+  final DateTime? jamMulai;
+  @override
+  @JsonKey(name: 'jam_berakhir')
+  final DateTime? jamBerakhir;
+  @override
+  final DateTime? tanggal;
+  @override
+  final String? link;
+  @override
+  final String? materi;
+  @override
+  @JsonKey(name: 'total_remaja', fromJson: _parseInt)
+  final int? totalRemaja;
+  @override
+  @JsonKey(name: 'mentor_id', fromJson: _parseInt)
+  final int? mentorId;
+  @override
+  @JsonKey(name: 'created_at')
+  final DateTime? createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  final DateTime? updatedAt;
+  @override
+  final String? status;
+
+  @override
+  String toString() {
+    return 'Meet(id: $id, topik: $topik, deskripsi: $deskripsi, jamMulai: $jamMulai, jamBerakhir: $jamBerakhir, tanggal: $tanggal, link: $link, materi: $materi, totalRemaja: $totalRemaja, mentorId: $mentorId, createdAt: $createdAt, updatedAt: $updatedAt, status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MeetImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.topik, topik) || other.topik == topik) &&
+            (identical(other.deskripsi, deskripsi) ||
+                other.deskripsi == deskripsi) &&
+            (identical(other.jamMulai, jamMulai) ||
+                other.jamMulai == jamMulai) &&
+            (identical(other.jamBerakhir, jamBerakhir) ||
+                other.jamBerakhir == jamBerakhir) &&
+            (identical(other.tanggal, tanggal) || other.tanggal == tanggal) &&
+            (identical(other.link, link) || other.link == link) &&
+            (identical(other.materi, materi) || other.materi == materi) &&
+            (identical(other.totalRemaja, totalRemaja) ||
+                other.totalRemaja == totalRemaja) &&
+            (identical(other.mentorId, mentorId) ||
+                other.mentorId == mentorId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      topik,
+      deskripsi,
+      jamMulai,
+      jamBerakhir,
+      tanggal,
+      link,
+      materi,
+      totalRemaja,
+      mentorId,
+      createdAt,
+      updatedAt,
+      status);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MeetImplCopyWith<_$MeetImpl> get copyWith =>
+      __$$MeetImplCopyWithImpl<_$MeetImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MeetImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Meet implements Meet {
+  factory _Meet(
+      {@JsonKey(fromJson: _parseInt) final int? id,
+      final String? topik,
+      final String? deskripsi,
+      @JsonKey(name: 'jam_mulai') final DateTime? jamMulai,
+      @JsonKey(name: 'jam_berakhir') final DateTime? jamBerakhir,
+      final DateTime? tanggal,
+      final String? link,
+      final String? materi,
+      @JsonKey(name: 'total_remaja', fromJson: _parseInt)
+      final int? totalRemaja,
+      @JsonKey(name: 'mentor_id', fromJson: _parseInt) final int? mentorId,
+      @JsonKey(name: 'created_at') final DateTime? createdAt,
+      @JsonKey(name: 'updated_at') final DateTime? updatedAt,
+      final String? status}) = _$MeetImpl;
+
+  factory _Meet.fromJson(Map<String, dynamic> json) = _$MeetImpl.fromJson;
+
+  @override
+  @JsonKey(fromJson: _parseInt)
+  int? get id;
+  @override
+  String? get topik;
+  @override
+  String? get deskripsi;
+  @override
+  @JsonKey(name: 'jam_mulai')
+  DateTime? get jamMulai;
+  @override
+  @JsonKey(name: 'jam_berakhir')
+  DateTime? get jamBerakhir;
+  @override
+  DateTime? get tanggal;
+  @override
+  String? get link;
+  @override
+  String? get materi;
+  @override
+  @JsonKey(name: 'total_remaja', fromJson: _parseInt)
+  int? get totalRemaja;
+  @override
+  @JsonKey(name: 'mentor_id', fromJson: _parseInt)
+  int? get mentorId;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime? get createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime? get updatedAt;
+  @override
+  String? get status;
+  @override
+  @JsonKey(ignore: true)
+  _$$MeetImplCopyWith<_$MeetImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

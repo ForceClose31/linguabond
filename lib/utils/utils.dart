@@ -16,4 +16,4 @@ const kDummyPictureProfileUrl =
 
 const keyToken = 'token';
 
-late User currentUser;
+User? currentUser;

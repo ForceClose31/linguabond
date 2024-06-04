@@ -16,4 +16,3 @@ class SetLoginPasswordVisible extends AuthenticationEvent {
 
 class SignInPressed extends AuthenticationEvent {}
 
-class SignUpPressed extends AuthenticationEvent {}

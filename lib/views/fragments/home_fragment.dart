@@ -9,13 +9,13 @@ class HomeFragment extends StatelessWidget {
         children: [
           SizedBox(height: MediaQuery.viewPaddingOf(context).top),
           const SizedBox(height: 16.0),
-          Text('Selamat datang,Guest! 👋',
+          Text('Selamat datang,${currentUser?.name ?? 'Guest'}! 👋',
               style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 16.0),
           BannerContainer(
             // ignore: unnecessary_string_interpolations
-            title: const Text('Guest'),
-            subtitle: const Text('Bergabung pada 9 April 2024'),
+            title: Text(currentUser?.name ?? 'Guest'),
+            subtitle: Text('Bergabung pada ${currentUser?.createdAt?.toFormattedDate(withWeekday: true, withMonthName: true, withHour: false) ?? 'Guest'}'),
             image: Image.asset('assets/images/profile-mentor.png'),
           ),
           const SizedBox(height: 16.0),

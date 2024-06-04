@@ -19,17 +19,15 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
       try {
         dynamic response = await ApiHelper.get(
           pathUrl: dotenv.env[switch (currentUser?.role) {
-            // UserRole.remaja => 'ENDPOINT_LEADERBOARD_REMAJA',
-            // UserRole.parent =>
-            _ => 'ENDPOINT_LEADERBOARD_REMAJA',
+            UserRole.mentor => 'ENDPOINT_LEADERBOARD_MENTOR',
+            _ => 'ENDPOINT_LEADERBOARD_MENTOR',
           }]!,
         );
 
-        _leaderboards = (response['data']['all'] as List)
+        _leaderboards = (response['data'] as List)
             .map((e) => Leaderboard.fromJson(e))
             .toList();
 
-        _position = response['data']['position'];
       } catch (e) {
         event.completer?.complete(false);
         ApiHelper.handleError(e);

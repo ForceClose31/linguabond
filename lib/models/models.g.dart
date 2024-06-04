@@ -7,7 +7,7 @@ part of 'models.dart';
 // **************************************************************************
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-      id: (json['id'] as num?)?.toInt(),
+      id: _parseInt(json['id']),
       name: json['name'] as String?,
       email: json['email'] as String?,
       emailVerifiedAt: json['email_verified_at'] == null
@@ -44,11 +44,11 @@ const _$UserRoleEnumMap = {
 };
 
 _$RemajaImpl _$$RemajaImplFromJson(Map<String, dynamic> json) => _$RemajaImpl(
-      id: (json['id'] as num?)?.toInt(),
+      id: _parseInt(json['id']),
       namaOrangTua: json['nama_orang_tua'] as String?,
-      exp: (json['exp'] as num?)?.toInt(),
-      star: (json['star'] as num?)?.toInt(),
-      level: (json['level'] as num?)?.toInt(),
+      exp: _parseInt(json['exp']),
+      star: _parseInt(json['star']),
+      level: _parseInt(json['level']),
       kodeOrangTua: json['kode_orang_tua'] as String?,
       userId: (json['user_id'] as num?)?.toInt(),
       username: json['username'] as String?,
@@ -95,11 +95,11 @@ Map<String, dynamic> _$$MentorImplToJson(_$MentorImpl instance) =>
 
 _$LeaderboardImpl _$$LeaderboardImplFromJson(Map<String, dynamic> json) =>
     _$LeaderboardImpl(
-      id: (json['id'] as num?)?.toInt(),
-      namaOrangTua: json['nama_orang_tua'] as String?,
-      exp: (json['exp'] as num?)?.toInt(),
-      star: (json['star'] as num?)?.toInt(),
-      level: (json['level'] as num?)?.toInt(),
+      id: _parseInt(json['id']),
+      name: json['name'] as String?,
+      exp: _parseInt(json['exp']),
+      star: _parseInt(json['star']),
+      level: _parseInt(json['level']),
       kodeOrangTua: json['kode_orang_tua'] as String?,
       userId: (json['user_id'] as num?)?.toInt(),
       username: json['username'] as String?,
@@ -115,7 +115,7 @@ _$LeaderboardImpl _$$LeaderboardImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$LeaderboardImplToJson(_$LeaderboardImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'nama_orang_tua': instance.namaOrangTua,
+      'name': instance.name,
       'exp': instance.exp,
       'star': instance.star,
       'level': instance.level,
@@ -125,4 +125,47 @@ Map<String, dynamic> _$$LeaderboardImplToJson(_$LeaderboardImpl instance) =>
       'orang_tua_id': instance.orangTuaId,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
+    };
+
+_$MeetImpl _$$MeetImplFromJson(Map<String, dynamic> json) => _$MeetImpl(
+      id: _parseInt(json['id']),
+      topik: json['topik'] as String?,
+      deskripsi: json['deskripsi'] as String?,
+      jamMulai: json['jam_mulai'] == null
+          ? null
+          : DateTime.parse(json['jam_mulai'] as String),
+      jamBerakhir: json['jam_berakhir'] == null
+          ? null
+          : DateTime.parse(json['jam_berakhir'] as String),
+      tanggal: json['tanggal'] == null
+          ? null
+          : DateTime.parse(json['tanggal'] as String),
+      link: json['link'] as String?,
+      materi: json['materi'] as String?,
+      totalRemaja: _parseInt(json['total_remaja']),
+      mentorId: _parseInt(json['mentor_id']),
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
+      status: json['status'] as String?,
+    );
+
+Map<String, dynamic> _$$MeetImplToJson(_$MeetImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'topik': instance.topik,
+      'deskripsi': instance.deskripsi,
+      'jam_mulai': instance.jamMulai?.toIso8601String(),
+      'jam_berakhir': instance.jamBerakhir?.toIso8601String(),
+      'tanggal': instance.tanggal?.toIso8601String(),
+      'link': instance.link,
+      'materi': instance.materi,
+      'total_remaja': instance.totalRemaja,
+      'mentor_id': instance.mentorId,
+      'created_at': instance.createdAt?.toIso8601String(),
+      'updated_at': instance.updatedAt?.toIso8601String(),
+      'status': instance.status,
     };

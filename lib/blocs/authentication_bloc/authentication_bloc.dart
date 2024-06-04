@@ -43,7 +43,7 @@ class AuthenticationBloc
         NavigationHelper.back();
       }
       NavigationHelper.toReplacement(
-          SlidePageRoute(pageBuilder: (context) => const HomePage()));
+          SlidePageRoute(pageBuilder: (context) => HomePage(key: homePageKey)));
     });
 
   }

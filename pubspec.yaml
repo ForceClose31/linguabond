@@ -40,7 +40,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
-    # - .env
+    - .env
   fonts:
     - family: FeatherBold
       fonts:

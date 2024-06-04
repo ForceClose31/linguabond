@@ -37,10 +37,7 @@ class MyApp extends StatelessWidget {
         ],
         child: LinguaboundMaterialApp(
           title: 'Linguabound',
-          home:
-              // ignore: unnecessary_null_comparison
-              currentUser != null ? const HomePage() : const SignInPage(),
+          home: currentUser != null ? HomePage(key: homePageKey) : const SignInPage(),
         ),
       );
 }
-
