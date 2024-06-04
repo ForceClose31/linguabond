@@ -26,7 +26,6 @@ class MeetForm extends StatefulWidget {
   const MeetForm({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _MeetFormState createState() => _MeetFormState();
 }
 
@@ -34,17 +33,16 @@ class _MeetFormState extends State<MeetForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _topikController = TextEditingController();
   final TextEditingController _linkController = TextEditingController();
-  final TextEditingController _materiController = TextEditingController();
   final TextEditingController _deskripsiController = TextEditingController();
   final TextEditingController _startTimeController = TextEditingController();
   final TextEditingController _endTimeController = TextEditingController();
   final TextEditingController _tanggalController = TextEditingController();
   final TextEditingController _pesertaController = TextEditingController();
+  final TextEditingController _materiController = TextEditingController();
 
   DateTime? _startTime;
   DateTime? _endTime;
   DateTime? _tanggal;
-  late String? _materiFileUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -82,22 +80,14 @@ class _MeetFormState extends State<MeetForm> {
           TextFormField(
             controller: _materiController,
             decoration: const InputDecoration(
-              labelText: 'Link Modul',
+              labelText: 'Link Materi',
             ),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              final pickedFile = await ApiHelper.getFile(
-                uri: Uri.parse('FILE_UPLOAD_ENDPOINT'),
-              );
-              if (pickedFile != null) {
-                setState(() {
-                  _materiFileUrl = pickedFile.toString();
-                  _materiController.text = _materiFileUrl!;
-                });
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter a Materi link';
               }
+              return null;
             },
-            child: const Text('Upload Materi'),
           ),
           const SizedBox(height: 24.0),
           TextFormField(
@@ -120,7 +110,7 @@ class _MeetFormState extends State<MeetForm> {
                     pickedTime.minute,
                   );
                   _startTimeController.text =
-                      DateFormat('HH:mm').format(_startTime!);
+                      DateFormat('yyyy-MM-dd HH:mm:ss').format(_startTime!);
                 });
               }
             },
@@ -146,7 +136,7 @@ class _MeetFormState extends State<MeetForm> {
                     pickedTime.minute,
                   );
                   _endTimeController.text =
-                      DateFormat('HH:mm').format(_endTime!);
+                      DateFormat('yyyy-MM-dd HH:mm:ss').format(_endTime!);
                 });
               }
             },
@@ -206,51 +196,41 @@ class _MeetFormState extends State<MeetForm> {
     );
   }
 
-  void _submitForm() async {
+  Future<void> _submitForm() async {
     final topik = _topikController.text;
     final linkLink = _linkController.text;
-    final materi = _materiController.text;
     final deskripsi = _deskripsiController.text;
+    final materi = _materiController.text;
     final startTime = _startTimeController.text;
     final endTime = _endTimeController.text;
     final tanggal = _tanggalController.text;
     final peserta = _pesertaController.text;
 
-    try {
-      await ApiHelper.postMultipart(
-        pathUrl: dotenv.env['ENDPOINT_MEET_MENTOR_ADD']!,
-        fields: {
-          'topik': topik,
-          'link': linkLink,
-          'materi': materi,
-          'jam_mulai': startTime,
-          'jam_berakhir': endTime,
-          'tanggal': tanggal,
-          'deskripsi': deskripsi,
-          'total_remaja': peserta,
-        },
-        files: [
-          await http.MultipartFile.fromPath('file',
-              materi), 
-        ],
-      );
-      
-      // Jika berhasil, kembali ke halaman sebelumnya
-      NavigationHelper.back();
-    } catch (e) {
-      // Tangani error dengan menampilkan pesan kesalahan
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Failed to create meet. Please try again later.'),
-      ));
-    }
+    await ApiHelper.post(
+      pathUrl: dotenv.env['ENDPOINT_MEET_MENTOR_ADD']!,
+      body: {
+        'topik': topik,
+        'link': linkLink,
+        'materi': materi,
+        'jam_mulai': startTime,
+        'jam_berakhir': endTime,
+        'tanggal': tanggal,
+        'deskripsi': deskripsi,
+        'total_remaja': peserta,
+      },
+    );
+    NavigationHelper.back();
   }
 
   @override
   void dispose() {
     _topikController.dispose();
     _linkController.dispose();
-    _materiController.dispose();
     _deskripsiController.dispose();
+    _startTimeController.dispose();
+    _endTimeController.dispose();
+    _tanggalController.dispose();
+    _pesertaController.dispose();
     super.dispose();
   }
 }
