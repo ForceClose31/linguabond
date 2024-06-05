@@ -52,21 +52,6 @@ class ProfileFragment extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Positioned(
-                          bottom: 0.0,
-                          right: MediaQuery.sizeOf(context).width / 2 -
-                              56.0 -
-                              32.0,
-                          child: IconButton.filled(
-                            onPressed: () {},
-                            icon: const Icon(Icons.camera_alt),
-                            iconSize: 28.0,
-                            style: const ButtonStyle(
-                              fixedSize:
-                                  WidgetStatePropertyAll(Size(56.0, 56.0)),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),

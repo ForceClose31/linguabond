@@ -97,6 +97,7 @@ _$LeaderboardImpl _$$LeaderboardImplFromJson(Map<String, dynamic> json) =>
     _$LeaderboardImpl(
       id: _parseInt(json['id']),
       name: json['name'] as String?,
+      foto: json['foto'] as String?,
       exp: _parseInt(json['exp']),
       star: _parseInt(json['star']),
       level: _parseInt(json['level']),
@@ -116,6 +117,7 @@ Map<String, dynamic> _$$LeaderboardImplToJson(_$LeaderboardImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'foto': instance.foto,
       'exp': instance.exp,
       'star': instance.star,
       'level': instance.level,

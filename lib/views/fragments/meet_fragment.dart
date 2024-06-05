@@ -109,8 +109,7 @@ class _MeetFragmentState extends State<MeetFragment> {
                       _buildTableRow(context, "Topic", ': ${meet.topik}'),
                       _buildLinkTableRow(
                           context, "Link Meet", ': ${meet.link}'),
-                      _buildLinkTableRow(context, "Materi",
-                          ': ${_truncateText(meet.materi, 25)}'),
+                      _buildLinkTableRow(context, "Materi", ': ${meet.materi}'),
                       _buildTableRow(
                         context,
                         "Jam Mulai",
@@ -154,63 +153,56 @@ class _MeetFragmentState extends State<MeetFragment> {
           const SizedBox(height: 16.0),
         ],
       );
+}
 
-  TableRow _buildLinkTableRow(BuildContext context, String label, String? url) {
-    return TableRow(
-      children: [
-        Text(
-          "$label",
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(color: kColorBorder),
-        ),
-        InkWell(
+TableRow _buildLinkTableRow(BuildContext context, String label, String? url) {
+  return TableRow(
+    children: [
+      Text(
+        label,
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .copyWith(color: kColorBorder),
+        maxLines: 1,
+      ),
+      InkWell(
           onTap: () => _launchURL(url),
           child: Text(
-            _truncateText(url, 25),
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: kColorBorder,
-                ),
-          ),
-        ),
-      ],
-    );
-  }
+            url!,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: kColorBorder),
+          )),
+    ],
+  );
+}
 
-  TableRow _buildTableRow(BuildContext context, String label, String? value) {
-    return TableRow(
-      children: [
-        Text(
-          "$label",
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(color: kColorBorder),
-        ),
-        Text(
-          value ?? '',
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(color: kColorBorder),
-        ),
-      ],
-    );
-  }
+TableRow _buildTableRow(BuildContext context, String label, String? value) {
+  return TableRow(
+    children: [
+      Text(
+        label,
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .copyWith(color: kColorBorder),
+      ),
+      Text(
+        value ?? '',
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .copyWith(color: kColorBorder),
+      ),
+    ],
+  );
+}
 
-  String _truncateText(String? text, int maxLength) {
-    if (text == null) return '';
-    return text.length <= maxLength
-        ? text
-        : '${text.substring(0, maxLength)}...';
-  }
-
-  Future<void> _launchURL(String? url) async {
-    // ignore: no_leading_underscores_for_local_identifiers
-    final Uri _url = Uri.parse(url!);
-    if (!await launchUrl(_url)) {
-      throw 'Could not launch $url';
-    }
+Future<void> _launchURL(String? url) async {
+  final Uri url0 = Uri.parse(url!);
+  if (!await launchUrl(url0)) {
+    throw 'Could not launch $url';
   }
 }

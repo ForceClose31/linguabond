@@ -69,6 +69,7 @@ class Leaderboard with _$Leaderboard {
   factory Leaderboard({
     @JsonKey(fromJson: _parseInt) int? id,
     String? name,
+    String? foto,
     @JsonKey(fromJson: _parseInt) int? exp,
     @JsonKey(fromJson: _parseInt) int? star,
     @JsonKey(fromJson: _parseInt) int? level,
