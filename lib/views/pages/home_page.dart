@@ -17,7 +17,7 @@ class HomePageState extends State<HomePage> {
         body: [
           const HomeFragment(),
           const MeetFragment(),
-          const ProfileFragment(),
+          ProfileFragment(),
         ][_selectedIndex],
         bottomNavigationBar: NavigationBarTheme(
           data: NavigationBarTheme.of(context).copyWith(

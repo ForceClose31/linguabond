@@ -1,8 +1,8 @@
 part of 'fragments.dart';
 
 class ProfileFragment extends StatelessWidget {
-  const ProfileFragment({super.key});
-
+  ProfileFragment({super.key});
+  final image = currentUser?.foto;
   @override
   Widget build(BuildContext context) => Scaffold(
         body: AutofillGroup(
@@ -46,8 +46,7 @@ class ProfileFragment extends StatelessWidget {
                               dialogIconSize: 150.0,
                               icon: Icons.account_circle_outlined,
                               border: const Border(),
-                              image:
-                                  const NetworkImage(kDummyPictureProfileUrl),
+                              image: NetworkImage(image!),
                               borderRadius: BorderRadius.circular(75.0),
                             ),
                           ),
