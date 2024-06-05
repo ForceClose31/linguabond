@@ -138,6 +138,7 @@ final class ApiHelper {
     }
 
     MyApp.leaderboardBloc.add(InitializeLeaderboardData());
+    MyApp.meetBloc.add(InitializeMeetData());
   }
 
   static Future<String?> _getToken({bool refreshCurrentUser = false}) async {
@@ -212,6 +213,7 @@ final class ApiHelper {
 
     // TODO: Set all bloc to initial
     MyApp.leaderboardBloc.add(SetLeaderboardToInitial());
+    MyApp.meetBloc.add(SetMeetToInitial());
   }
 
   static Future<dynamic> get({required String pathUrl}) =>

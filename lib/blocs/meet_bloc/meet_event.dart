@@ -4,24 +4,24 @@ abstract class MeetEvent {
   const MeetEvent();
 }
 
-class LoadMeets extends MeetEvent {}
+class SetMeetState extends MeetEvent {
+  SetMeetState([this.state]);
+
+  final MeetState? state;
+}
+
+class SetMeetToInitial extends MeetEvent {}
+
+class InitializeMeetData extends MeetEvent {
+  InitializeMeetData({this.completer});
+
+  final Completer<bool>? completer;
+}
 
 class AddMeet extends MeetEvent {
   final Meet meet;
 
   const AddMeet(this.meet);
-}
-
-class UpdateMeet extends MeetEvent {
-  final Meet meet;
-
-  const UpdateMeet(this.meet);
-}
-
-class DeleteMeet extends MeetEvent {
-  final int id;
-
-  const DeleteMeet(this.id);
 }
 
 class PublishMeet extends MeetEvent {

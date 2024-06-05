@@ -1,16 +1,40 @@
 part of 'fragments.dart';
 
-
-class MeetFragment extends StatelessWidget {
+class MeetFragment extends StatefulWidget {
   const MeetFragment({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
+  _MeetFragmentState createState() => _MeetFragmentState();
+}
+
+class _MeetFragmentState extends State<MeetFragment> {
+  Future<void> _publishMeet(int meetId) async {
+    try {
+      await ApiHelper.post(
+          pathUrl: '${dotenv.env['ENDPOINT_MEET_MENTOR_PUBLISH']!}/$meetId');
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Jadwal sudah dipublish')),
+      );
+    } catch (error) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $error')),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (MyApp.meetBloc.state is MeetInitial) {
+      MyApp.meetBloc.add(InitializeMeetData());
+    }
     return Scaffold(
       body: BlocBuilder<MeetBloc, MeetState>(
-        builder: (context, state) {
-          if (state is MeetLoaded) {
-            final meets = state.meets;
+        builder: (context, meetstate) {
+          if (meetstate is MeetDataLoaded) {
+            final meets = meetstate.meet;
             return CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -32,24 +56,17 @@ class MeetFragment extends StatelessWidget {
                   sliver: SliverList.builder(
                     itemBuilder: (context, index) {
                       final meet = meets[index];
-                      return buildMeetList(
-                        context: context,
-                        date: meet.tanggal,
-                        time: meet.jamMulai,
-                        name: currentUser?.name,
-                        topic: meet.topik,
-                        subtopic: meet.deskripsi,
-                      );
+                      return buildMeetList(context: context, meet: meet);
                     },
                     itemCount: meets.length,
                   ),
                 ),
               ],
             );
-          } else if (state is MeetLoading) {
-            return Center(child: CircularProgressIndicator());
+          } else if (meetstate is MeetLoading) {
+            return const Center(child: CircularProgressIndicator());
           } else {
-            return Center(child: Text('Failed to load meets.'));
+            return const Center(child: Text('Failed to load meets.'));
           }
         },
       ),
@@ -69,11 +86,7 @@ class MeetFragment extends StatelessWidget {
 
   Widget buildMeetList({
     required BuildContext context,
-    DateTime ? date,
-    DateTime ? time,
-    String ? name,
-    String ? topic,
-    String ? subtopic,
+    required Meet meet,
   }) =>
       Column(
         children: [
@@ -96,20 +109,124 @@ class MeetFragment extends StatelessWidget {
                           Row(
                             children: [
                               Text(
+                                "Topic           : ",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: kColorBorder),
+                              ),
+                              const SizedBox(width: 8.0),
+                              Text(
+                                meet.topik!,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: kColorBorder),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Link Meet      : ",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: kColorBorder),
+                              ),
+                              const SizedBox(width: 8.0),
+                              Text(
+                                meet.link!,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: kColorBorder),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Materi        : ",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: kColorBorder),
+                              ),
+                              const SizedBox(width: 8.0),
+                              Text(
+                                meet.materi!,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: kColorBorder),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Jam Mulai       : ",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: kColorBorder),
+                              ),
+                              const SizedBox(width: 8.0),
+                              Text(
+                                meet.jamMulai!.toFormattedDate(
+                                    withYear: false, withHour: true),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: kColorBorder),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Jam Mulai       : ",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: kColorBorder),
+                              ),
+                              const SizedBox(width: 8.0),
+                              Text(
+                                meet.jamMulai!.toFormattedDate(
+                                    withYear: false, withHour: true),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: kColorBorder),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Jam Berakhir   : ",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: kColorBorder),
+                              ),
+                              const SizedBox(width: 8.0),
+                              Text(
+                                meet.jamBerakhir!.toFormattedDate(
+                                    withYear: false, withHour: true),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: kColorBorder),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
                                 "Date           : ",
-                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kColorBorder),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                date!.toFormattedDate(withMonthName: true),
-                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kColorBorder),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Time           : ",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
@@ -117,7 +234,8 @@ class MeetFragment extends StatelessWidget {
                               ),
                               const SizedBox(width: 8.0),
                               Text(
-                                time!.toFormattedDate(withHour: true),
+                                meet.tanggal!
+                                    .toFormattedDate(withMonthName: true),
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
@@ -128,7 +246,7 @@ class MeetFragment extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "Teacher    : ",
+                                "Jumlah Peserta   : ",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
@@ -136,7 +254,7 @@ class MeetFragment extends StatelessWidget {
                               ),
                               const SizedBox(width: 8.0),
                               Text(
-                                name!,
+                                meet.totalRemaja.toString(),
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
@@ -147,7 +265,7 @@ class MeetFragment extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "Topic          : ",
+                                "Deskripsi  : ",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
@@ -155,26 +273,7 @@ class MeetFragment extends StatelessWidget {
                               ),
                               const SizedBox(width: 8.0),
                               Text(
-                                topic!,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Subtopic  : ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                subtopic!,
+                                meet.deskripsi!,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium!
@@ -186,11 +285,11 @@ class MeetFragment extends StatelessWidget {
                           Row(
                             children: [
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () => _publishMeet(meet.id!),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: kColorBorder,
                                 ),
-                                child: const Text('Status: Publish'),
+                                child: const Text('Pubish Jadwal'),
                               ),
                             ],
                           ),
