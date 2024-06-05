@@ -100,203 +100,53 @@ class _MeetFragmentState extends State<MeetFragment> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Table(
+                    columnWidths: const {
+                      0: IntrinsicColumnWidth(),
+                      1: FixedColumnWidth(260),
+                    },
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "Topic           : ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                meet.topik!,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Link Meet      : ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                meet.link!,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Materi        : ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                meet.materi!,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Jam Mulai       : ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                meet.jamMulai!.toFormattedDate(
-                                    withYear: false, withHour: true),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Jam Mulai       : ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                meet.jamMulai!.toFormattedDate(
-                                    withYear: false, withHour: true),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Jam Berakhir   : ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                meet.jamBerakhir!.toFormattedDate(
-                                    withYear: false, withHour: true),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Date           : ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                meet.tanggal!
-                                    .toFormattedDate(withMonthName: true),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Jumlah Peserta   : ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                meet.totalRemaja.toString(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Deskripsi  : ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                meet.deskripsi!,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: kColorBorder),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 15.0),
-                          Row(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () => _publishMeet(meet.id!),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: kColorBorder,
-                                ),
-                                child: const Text('Pubish Jadwal'),
-                              ),
-                            ],
-                          ),
-                        ],
+                      _buildTableRow(context, "Topic", ': ${meet.topik}'),
+                      _buildLinkTableRow(
+                          context, "Link Meet", ': ${meet.link}'),
+                      _buildLinkTableRow(context, "Materi",
+                          ': ${_truncateText(meet.materi, 25)}'),
+                      _buildTableRow(
+                        context,
+                        "Jam Mulai",
+                        ': ${meet.jamMulai!.toFormattedDate(withYear: false, withMonthName: false, withWeekday: false, withHour: true)}',
+                      ),
+                      _buildTableRow(
+                        context,
+                        "Jam Berakhir",
+                        ': ${meet.jamBerakhir!.toFormattedDate(withYear: false, withMonthName: false, withWeekday: false, withHour: true)}',
+                      ),
+                      _buildTableRow(
+                        context,
+                        "Date",
+                        ': ${meet.tanggal!.toFormattedDate(withMonthName: true)}',
+                      ),
+                      _buildTableRow(
+                        context,
+                        "Jumlah Peserta",
+                        ': ${meet.totalRemaja.toString()}',
+                      ),
+                      _buildTableRow(
+                          context, "Deskripsi", ': ${meet.deskripsi}'),
+                    ],
+                  ),
+                  const SizedBox(height: 15.0),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => _publishMeet(meet.id!),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kColorBorder,
+                        ),
+                        child: const Text('Pubish Jadwal'),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -304,4 +154,63 @@ class _MeetFragmentState extends State<MeetFragment> {
           const SizedBox(height: 16.0),
         ],
       );
+
+  TableRow _buildLinkTableRow(BuildContext context, String label, String? url) {
+    return TableRow(
+      children: [
+        Text(
+          "$label",
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(color: kColorBorder),
+        ),
+        InkWell(
+          onTap: () => _launchURL(url),
+          child: Text(
+            _truncateText(url, 25),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: kColorBorder,
+                ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  TableRow _buildTableRow(BuildContext context, String label, String? value) {
+    return TableRow(
+      children: [
+        Text(
+          "$label",
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(color: kColorBorder),
+        ),
+        Text(
+          value ?? '',
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(color: kColorBorder),
+        ),
+      ],
+    );
+  }
+
+  String _truncateText(String? text, int maxLength) {
+    if (text == null) return '';
+    return text.length <= maxLength
+        ? text
+        : '${text.substring(0, maxLength)}...';
+  }
+
+  Future<void> _launchURL(String? url) async {
+    // ignore: no_leading_underscores_for_local_identifiers
+    final Uri _url = Uri.parse(url!);
+    if (!await launchUrl(_url)) {
+      throw 'Could not launch $url';
+    }
+  }
 }

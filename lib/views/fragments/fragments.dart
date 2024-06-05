@@ -13,6 +13,7 @@ import 'package:linguabond/views/pages/pages.dart';
 import 'package:linguabond/views/widgets/widgets.dart';
 import 'package:linguabound_widget/linguabound_widget.dart';
 import 'package:m_widget/m_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part 'home_fragment.dart';
 part 'meet_fragment.dart';
