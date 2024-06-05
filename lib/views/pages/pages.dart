@@ -18,5 +18,6 @@ import 'package:m_widget/m_widget.dart';
 part 'home_page.dart';
 part 'add_meet_page.dart';
 part 'leaderboard_page.dart';
+part 'on_boarding_pages.dart';
 
 part 'sign_in/sign_in_page.dart';

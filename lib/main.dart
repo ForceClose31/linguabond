@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         ],
         child: LinguaboundMaterialApp(
           title: 'Linguabound',
-          home: currentUser != null ? HomePage(key: homePageKey) : const SignInPage(),
+          home: currentUser != null ? HomePage(key: homePageKey) : const OnBoardingPage1(),
         ),
       );
 }
