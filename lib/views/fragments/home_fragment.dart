@@ -59,7 +59,7 @@ class HomeFragment extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16.0),
-          Text('Yuk, belajar bareng kita!',
+          Text('Yuk, mulai mengajar dengan penuh semangat!',
               style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 16.0),
           ListTile(

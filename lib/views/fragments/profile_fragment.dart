@@ -1,8 +1,8 @@
 part of 'fragments.dart';
 
 class ProfileFragment extends StatelessWidget {
-  const ProfileFragment({super.key});
-
+  ProfileFragment({super.key});
+  final image = currentUser?.foto;
   @override
   Widget build(BuildContext context) => Scaffold(
         body: AutofillGroup(
@@ -46,24 +46,8 @@ class ProfileFragment extends StatelessWidget {
                               dialogIconSize: 150.0,
                               icon: Icons.account_circle_outlined,
                               border: const Border(),
-                              image:
-                                  const NetworkImage(kDummyPictureProfileUrl),
+                              image: NetworkImage(image!),
                               borderRadius: BorderRadius.circular(75.0),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0.0,
-                          right: MediaQuery.sizeOf(context).width / 2 -
-                              56.0 -
-                              32.0,
-                          child: IconButton.filled(
-                            onPressed: () {},
-                            icon: const Icon(Icons.camera_alt),
-                            iconSize: 28.0,
-                            style: const ButtonStyle(
-                              fixedSize:
-                                  WidgetStatePropertyAll(Size(56.0, 56.0)),
                             ),
                           ),
                         ),
@@ -84,7 +68,8 @@ class ProfileFragment extends StatelessWidget {
                       labelText: 'Nama',
                     ),
                     textInputAction: TextInputAction.next,
-                    autofillHints: const [AutofillHints.username],
+                    autofillHints: const [AutofillHints.name],
+                    enabled: false,
                   ),
                 ),
               ),
@@ -99,7 +84,8 @@ class ProfileFragment extends StatelessWidget {
                       labelText: 'Email',
                     ),
                     textInputAction: TextInputAction.next,
-                    autofillHints: const [AutofillHints.username],
+                    autofillHints: const [AutofillHints.email],
+                    enabled: false,
                   ),
                 ),
               ),
@@ -117,7 +103,7 @@ class ProfileFragment extends StatelessWidget {
                       labelText: 'Gelar',
                     ),
                     textInputAction: TextInputAction.next,
-                    autofillHints: const [AutofillHints.username],
+                    enabled: false,
                   ),
                 ),
               ),
@@ -136,7 +122,7 @@ class ProfileFragment extends StatelessWidget {
                       labelText: 'Riwayat Pendidikan Terakhir',
                     ),
                     textInputAction: TextInputAction.next,
-                    autofillHints: const [AutofillHints.username],
+                    enabled: false,
                   ),
                 ),
               ),

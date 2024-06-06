@@ -1078,6 +1078,7 @@ mixin _$Leaderboard {
   @JsonKey(fromJson: _parseInt)
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
+  String? get foto => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _parseInt)
   int? get exp => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _parseInt)
@@ -1111,6 +1112,7 @@ abstract class $LeaderboardCopyWith<$Res> {
   $Res call(
       {@JsonKey(fromJson: _parseInt) int? id,
       String? name,
+      String? foto,
       @JsonKey(fromJson: _parseInt) int? exp,
       @JsonKey(fromJson: _parseInt) int? star,
       @JsonKey(fromJson: _parseInt) int? level,
@@ -1137,6 +1139,7 @@ class _$LeaderboardCopyWithImpl<$Res, $Val extends Leaderboard>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? foto = freezed,
     Object? exp = freezed,
     Object? star = freezed,
     Object? level = freezed,
@@ -1155,6 +1158,10 @@ class _$LeaderboardCopyWithImpl<$Res, $Val extends Leaderboard>
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      foto: freezed == foto
+          ? _value.foto
+          : foto // ignore: cast_nullable_to_non_nullable
               as String?,
       exp: freezed == exp
           ? _value.exp
@@ -1207,6 +1214,7 @@ abstract class _$$LeaderboardImplCopyWith<$Res>
   $Res call(
       {@JsonKey(fromJson: _parseInt) int? id,
       String? name,
+      String? foto,
       @JsonKey(fromJson: _parseInt) int? exp,
       @JsonKey(fromJson: _parseInt) int? star,
       @JsonKey(fromJson: _parseInt) int? level,
@@ -1231,6 +1239,7 @@ class __$$LeaderboardImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? foto = freezed,
     Object? exp = freezed,
     Object? star = freezed,
     Object? level = freezed,
@@ -1249,6 +1258,10 @@ class __$$LeaderboardImplCopyWithImpl<$Res>
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      foto: freezed == foto
+          ? _value.foto
+          : foto // ignore: cast_nullable_to_non_nullable
               as String?,
       exp: freezed == exp
           ? _value.exp
@@ -1296,6 +1309,7 @@ class _$LeaderboardImpl implements _Leaderboard {
   _$LeaderboardImpl(
       {@JsonKey(fromJson: _parseInt) this.id,
       this.name,
+      this.foto,
       @JsonKey(fromJson: _parseInt) this.exp,
       @JsonKey(fromJson: _parseInt) this.star,
       @JsonKey(fromJson: _parseInt) this.level,
@@ -1314,6 +1328,8 @@ class _$LeaderboardImpl implements _Leaderboard {
   final int? id;
   @override
   final String? name;
+  @override
+  final String? foto;
   @override
   @JsonKey(fromJson: _parseInt)
   final int? exp;
@@ -1343,7 +1359,7 @@ class _$LeaderboardImpl implements _Leaderboard {
 
   @override
   String toString() {
-    return 'Leaderboard(id: $id, name: $name, exp: $exp, star: $star, level: $level, kodeOrangTua: $kodeOrangTua, userId: $userId, username: $username, orangTuaId: $orangTuaId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Leaderboard(id: $id, name: $name, foto: $foto, exp: $exp, star: $star, level: $level, kodeOrangTua: $kodeOrangTua, userId: $userId, username: $username, orangTuaId: $orangTuaId, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -1353,6 +1369,7 @@ class _$LeaderboardImpl implements _Leaderboard {
             other is _$LeaderboardImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.foto, foto) || other.foto == foto) &&
             (identical(other.exp, exp) || other.exp == exp) &&
             (identical(other.star, star) || other.star == star) &&
             (identical(other.level, level) || other.level == level) &&
@@ -1371,7 +1388,7 @@ class _$LeaderboardImpl implements _Leaderboard {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, exp, star, level,
+  int get hashCode => Object.hash(runtimeType, id, name, foto, exp, star, level,
       kodeOrangTua, userId, username, orangTuaId, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
@@ -1392,6 +1409,7 @@ abstract class _Leaderboard implements Leaderboard {
   factory _Leaderboard(
           {@JsonKey(fromJson: _parseInt) final int? id,
           final String? name,
+          final String? foto,
           @JsonKey(fromJson: _parseInt) final int? exp,
           @JsonKey(fromJson: _parseInt) final int? star,
           @JsonKey(fromJson: _parseInt) final int? level,
@@ -1411,6 +1429,8 @@ abstract class _Leaderboard implements Leaderboard {
   int? get id;
   @override
   String? get name;
+  @override
+  String? get foto;
   @override
   @JsonKey(fromJson: _parseInt)
   int? get exp;
