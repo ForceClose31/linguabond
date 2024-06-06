@@ -1,4 +1,4 @@
-package com.example.linguabond
+package linguabound.mentor.id
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => meetBloc),
         ],
         child: LinguaboundMaterialApp(
-          title: 'Linguabound',
+          title: 'Linguabound Mentor',
           home: currentUser != null ? HomePage(key: homePageKey) : const OnBoardingPage1(),
         ),
       );

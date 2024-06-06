@@ -4,17 +4,13 @@ class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<AuthenticationBloc, AuthenticationState>(
+  Widget build(BuildContext context) => BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, stateAuthentication) {
           stateAuthentication as AuthenticationDataLoaded;
 
           if (kDebugMode) {
-            stateAuthentication.textControllerEmail.text =
-                "";
-            stateAuthentication.textControllerPassword.text =
-                "";
-
+            stateAuthentication.textControllerEmail.text = dotenv.env['USERNAME_DUMMY_MENTOR'] ?? '';
+            stateAuthentication.textControllerPassword.text = dotenv.env['PASSWORD_DUMMY_MENTOR'] ?? '';
           }
 
           return Scaffold(
@@ -49,26 +45,19 @@ class SignInPage extends StatelessWidget {
                         decoration: InputDecoration(
                           labelText: 'Password',
                           suffixIcon: IconButton(
-                            onPressed: () => MyApp.authenticationBloc.add(
-                                SetLoginPasswordVisible(
-                                    value: !stateAuthentication
-                                        .isPasswordVisible)),
-                            icon: Icon(!stateAuthentication.isPasswordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off),
+                            onPressed: () => MyApp.authenticationBloc.add(SetLoginPasswordVisible(value: !stateAuthentication.isPasswordVisible)),
+                            icon: Icon(!stateAuthentication.isPasswordVisible ? Icons.visibility : Icons.visibility_off),
                           ),
                         ),
                         obscureText: !stateAuthentication.isPasswordVisible,
-                        onEditingComplete: () =>
-                            MyApp.authenticationBloc.add(SignInPressed()),
+                        onEditingComplete: () => MyApp.authenticationBloc.add(SignInPressed()),
                       ),
                     ),
                     const SizedBox(height: 24.0),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: MyFilledButton(
-                        onPressed: () =>
-                            MyApp.authenticationBloc.add(SignInPressed()),
+                        onPressed: () => MyApp.authenticationBloc.add(SignInPressed()),
                         child: const Text('Masuk'),
                       ),
                     ),

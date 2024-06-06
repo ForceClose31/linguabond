@@ -11,8 +11,7 @@ class MeetFragment extends StatefulWidget {
 class _MeetFragmentState extends State<MeetFragment> {
   Future<void> _publishMeet(int meetId) async {
     try {
-      await ApiHelper.post(
-          pathUrl: '${dotenv.env['ENDPOINT_MEET_MENTOR_PUBLISH']!}/$meetId');
+      await ApiHelper.post(pathUrl: '${dotenv.env['ENDPOINT_MEET_MENTOR_PUBLISH']!}/$meetId');
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Jadwal sudah dipublish')),
@@ -107,8 +106,7 @@ class _MeetFragmentState extends State<MeetFragment> {
                     },
                     children: [
                       _buildTableRow(context, "Topic", ': ${meet.topik}'),
-                      _buildLinkTableRow(
-                          context, "Link Meet", ': ${meet.link}'),
+                      _buildLinkTableRow(context, "Link Meet", ': ${meet.link}'),
                       _buildLinkTableRow(context, "Materi", ': ${meet.materi}'),
                       _buildTableRow(
                         context,
@@ -130,8 +128,7 @@ class _MeetFragmentState extends State<MeetFragment> {
                         "Jumlah Peserta",
                         ': ${meet.totalRemaja.toString()}',
                       ),
-                      _buildTableRow(
-                          context, "Deskripsi", ': ${meet.deskripsi}'),
+                      _buildTableRow(context, "Deskripsi", ': ${meet.deskripsi}'),
                     ],
                   ),
                   const SizedBox(height: 15.0),
@@ -160,21 +157,16 @@ TableRow _buildLinkTableRow(BuildContext context, String label, String? url) {
     children: [
       Text(
         label,
-        style: Theme.of(context)
-            .textTheme
-            .bodyMedium!
-            .copyWith(color: kColorBorder),
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kColorBorder),
         maxLines: 1,
       ),
       InkWell(
-          onTap: () => _launchURL(url),
-          child: Text(
-            url!,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: kColorBorder),
-          )),
+        onTap: () => _launchURL(url),
+        child: Text(
+          url!,
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kColorBorder),
+        ),
+      ),
     ],
   );
 }
@@ -184,25 +176,23 @@ TableRow _buildTableRow(BuildContext context, String label, String? value) {
     children: [
       Text(
         label,
-        style: Theme.of(context)
-            .textTheme
-            .bodyMedium!
-            .copyWith(color: kColorBorder),
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kColorBorder),
       ),
       Text(
         value ?? '',
-        style: Theme.of(context)
-            .textTheme
-            .bodyMedium!
-            .copyWith(color: kColorBorder),
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kColorBorder),
       ),
     ],
   );
 }
 
 Future<void> _launchURL(String? url) async {
-  final Uri url0 = Uri.parse(url!);
-  if (!await launchUrl(url0)) {
-    throw 'Could not launch $url';
+  try {
+    final Uri url0 = Uri.parse(url!);
+    if (!await launchUrl(url0)) {
+      throw 'Error';
+    }
+  } catch (e) {
+    showErrorDialog('Url tidak bisa dibuka');
   }
 }

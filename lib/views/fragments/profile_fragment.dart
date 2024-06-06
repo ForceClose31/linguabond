@@ -22,16 +22,13 @@ class ProfileFragment extends StatelessWidget {
                         Container(
                           width: double.infinity,
                           height: 150.0 + MediaQuery.viewPaddingOf(context).top,
-                          color:
-                              Theme.of(context).colorScheme.secondaryContainer,
+                          color: Theme.of(context).colorScheme.secondaryContainer,
                         ),
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: Container(
                             width: double.infinity,
-                            height: 200.0 -
-                                150.0 +
-                                MediaQuery.viewPaddingOf(context).top,
+                            height: 200.0 - 150.0 + MediaQuery.viewPaddingOf(context).top,
                             color: Theme.of(context).colorScheme.surface,
                           ),
                         ),
@@ -46,8 +43,14 @@ class ProfileFragment extends StatelessWidget {
                               dialogIconSize: 150.0,
                               icon: Icons.account_circle_outlined,
                               border: const Border(),
-                              image: NetworkImage(image!),
+                              image: CachedNetworkImageProvider(image ?? ''),
                               borderRadius: BorderRadius.circular(75.0),
+                              containerBackgroundColor: const Color(0xFFA590A7),
+                              dialogBackgroundColor: const Color(0xFFA590A7),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SvgPicture.asset('assets/svgs/profile.svg'),
+                              ),
                             ),
                           ),
                         ),
@@ -62,8 +65,7 @@ class ProfileFragment extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 sliver: SliverToBoxAdapter(
                   child: TextField(
-                    controller: TextEditingController(
-                        text: currentUser?.name ?? 'Guest'),
+                    controller: TextEditingController(text: currentUser?.name ?? 'Guest'),
                     decoration: const InputDecoration(
                       labelText: 'Nama',
                     ),
@@ -78,8 +80,7 @@ class ProfileFragment extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 sliver: SliverToBoxAdapter(
                   child: TextField(
-                    controller: TextEditingController(
-                        text: currentUser?.email ?? 'Guest'),
+                    controller: TextEditingController(text: currentUser?.email ?? 'Guest'),
                     decoration: const InputDecoration(
                       labelText: 'Email',
                     ),
@@ -114,8 +115,7 @@ class ProfileFragment extends StatelessWidget {
                   child: TextField(
                     controller: TextEditingController(
                         text: currentUser?.detail?.mapOrNull(
-                              mentor: (value) =>
-                                  value.riwayatPendidikanTerakhir,
+                              mentor: (value) => value.riwayatPendidikanTerakhir,
                             ) ??
                             'Guest'),
                     decoration: const InputDecoration(
@@ -130,8 +130,7 @@ class ProfileFragment extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: EdgeInsets.fromLTRB(
-              16.0, 16.0, 16.0, 16.0 + MediaQuery.viewInsetsOf(context).bottom),
+          padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0 + MediaQuery.viewInsetsOf(context).bottom),
           child: ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),
@@ -139,8 +138,7 @@ class ProfileFragment extends StatelessWidget {
             textColor: kColorWhite,
             onTap: () async {
               await ApiHelper.signOut();
-              NavigationHelper.toReplacement(
-                  SlidePageRoute(pageBuilder: (context) => const SignInPage()));
+              NavigationHelper.toReplacement(SlidePageRoute(pageBuilder: (context) => const SignInPage()));
             },
           ),
         ),
