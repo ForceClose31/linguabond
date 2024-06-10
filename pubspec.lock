@@ -629,11 +629,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: e4728c1f0a11eed4fe1c9cc9fc35909cf6940595
-      resolved-ref: e4728c1f0a11eed4fe1c9cc9fc35909cf6940595
+      ref: "028bf0c4bbc39ca30ee7b7f358de78be2462338e"
+      resolved-ref: "028bf0c4bbc39ca30ee7b7f358de78be2462338e"
       url: "https://github.com/BlastTea/linguabound_widget.git"
     source: git
-    version: "1.6.4"
+    version: "1.6.11"
   lints:
     dependency: transitive
     description:
@@ -654,11 +654,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: b1191678af1bbefe4ffde909b42804708bb5ab17
-      resolved-ref: b1191678af1bbefe4ffde909b42804708bb5ab17
+      ref: "106d58a7eeea6ba74334cc7c59fa300249555a27"
+      resolved-ref: "106d58a7eeea6ba74334cc7c59fa300249555a27"
       url: "https://github.com/BlastTea/MWidget.git"
     source: git
-    version: "3.8.1"
+    version: "3.9.4"
   matcher:
     dependency: transitive
     description:

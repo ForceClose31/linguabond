@@ -4,81 +4,68 @@ class MeetFragment extends StatefulWidget {
   const MeetFragment({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _MeetFragmentState createState() => _MeetFragmentState();
+  State<MeetFragment> createState() => _MeetFragmentState();
 }
 
 class _MeetFragmentState extends State<MeetFragment> {
-  Future<void> _publishMeet(int meetId) async {
-    try {
-      await ApiHelper.post(pathUrl: '${dotenv.env['ENDPOINT_MEET_MENTOR_PUBLISH']!}/$meetId');
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Jadwal sudah dipublish')),
-      );
-    } catch (error) {
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $error')),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (MyApp.meetBloc.state is MeetInitial) {
-      MyApp.meetBloc.add(InitializeMeetData());
-    }
     return Scaffold(
       body: BlocBuilder<MeetBloc, MeetState>(
         builder: (context, meetstate) {
           if (meetstate is MeetDataLoaded) {
             final meets = meetstate.meet;
-            return CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: SizedBox(height: MediaQuery.of(context).padding.top),
-                ),
-                const SliverToBoxAdapter(child: SizedBox(height: 16.0)),
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  sliver: SliverToBoxAdapter(
-                    child: Text(
-                      'Semua Jadwal Meet',
-                      style: Theme.of(context).textTheme.headlineMedium,
+            return RefreshIndicator(
+              onRefresh: () {
+                Completer<bool> completer = Completer();
+                MyApp.meetBloc.add(InitializeMeetData(completer: completer));
+                return completer.future;
+              },
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.top)),
+                  const SliverToBoxAdapter(child: SizedBox(height: 16.0)),
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    sliver: SliverToBoxAdapter(
+                      child: Text(
+                        'Semua Jadwal Meet',
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
                     ),
                   ),
-                ),
-                const SliverToBoxAdapter(child: SizedBox(height: 16.0)),
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  sliver: SliverList.builder(
-                    itemBuilder: (context, index) {
-                      final meet = meets[index];
-                      return buildMeetList(context: context, meet: meet);
-                    },
-                    itemCount: meets.length,
+                  const SliverToBoxAdapter(child: SizedBox(height: 16.0)),
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    sliver: SliverList.builder(
+                      itemBuilder: (context, index) {
+                        final meet = meets[index];
+                        return buildMeetList(context: context, meet: meet);
+                      },
+                      itemCount: meets.length,
+                    ),
                   ),
-                ),
-              ],
+                  const SliverToBoxAdapter(child: SizedBox(height: kBottomFabPadding))
+                ],
+              ),
             );
-          } else if (meetstate is MeetLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            return const Center(child: Text('Failed to load meets.'));
+          } else if (meetstate is MeetError) {
+            return ErrorOccuredButton(
+              onRetryPressed: () => MyApp.meetBloc.add(InitializeMeetData()),
+            );
           }
+
+          return const Center(child: CircularProgressIndicator());
         },
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 16.0, right: 16.0),
-        child: FloatingActionButton(
-          onPressed: () {
-            NavigationHelper.to(
-              SlidePageRoute(pageBuilder: (context) => const AddMeetPage()),
-            );
-          },
-          child: const Icon(Icons.add),
-        ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          NavigationHelper.to(
+            SlidePageRoute(pageBuilder: (context) => const AddMeetPage()),
+          );
+        },
+        icon: const Icon(Icons.add),
+        label: const Text('Jadwal'),
       ),
     );
   }
@@ -99,50 +86,54 @@ class _MeetFragmentState extends State<MeetFragment> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Table(
-                    columnWidths: const {
-                      0: IntrinsicColumnWidth(),
-                      1: FixedColumnWidth(260),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Table(
+                        columnWidths: {
+                          0: const FixedColumnWidth(100.0),
+                          1: const FixedColumnWidth(16.0),
+                          2: FixedColumnWidth(constraints.maxWidth - 100.0 - 16.0),
+                        },
+                        children: [
+                          _buildTableRow(context, "Topic", '${meet.topik}'),
+                          _buildLinkTableRow(context, "Link Meet", '${meet.link}'),
+                          _buildLinkTableRow(context, "Materi", '${meet.materi}'),
+                          _buildTableRow(
+                            context,
+                            "Jam Mulai",
+                            TimeOfDay.fromDateTime(meet.jamMulai!).toFormattedString(),
+                          ),
+                          _buildTableRow(
+                            context,
+                            "Jam Berakhir",
+                            TimeOfDay.fromDateTime(meet.jamBerakhir!).toFormattedString(),
+                          ),
+                          _buildTableRow(
+                            context,
+                            "Date",
+                            meet.tanggal!.toFormattedDate(withMonthName: true),
+                          ),
+                          _buildTableRow(
+                            context,
+                            "Jumlah Peserta",
+                            meet.totalRemaja.toString(),
+                          ),
+                          _buildTableRow(context, "Deskripsi", '${meet.deskripsi}'),
+                          _buildTableRow(context, "Status", meet.status!.text),
+                        ],
+                      );
                     },
-                    children: [
-                      _buildTableRow(context, "Topic", ': ${meet.topik}'),
-                      _buildLinkTableRow(context, "Link Meet", ': ${meet.link}'),
-                      _buildLinkTableRow(context, "Materi", ': ${meet.materi}'),
-                      _buildTableRow(
-                        context,
-                        "Jam Mulai",
-                        ': ${meet.jamMulai!.toFormattedDate(withYear: false, withMonthName: false, withWeekday: false, withHour: true)}',
-                      ),
-                      _buildTableRow(
-                        context,
-                        "Jam Berakhir",
-                        ': ${meet.jamBerakhir!.toFormattedDate(withYear: false, withMonthName: false, withWeekday: false, withHour: true)}',
-                      ),
-                      _buildTableRow(
-                        context,
-                        "Date",
-                        ': ${meet.tanggal!.toFormattedDate(withMonthName: true)}',
-                      ),
-                      _buildTableRow(
-                        context,
-                        "Jumlah Peserta",
-                        ': ${meet.totalRemaja.toString()}',
-                      ),
-                      _buildTableRow(context, "Deskripsi", ': ${meet.deskripsi}'),
-                    ],
                   ),
                   const SizedBox(height: 15.0),
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () => _publishMeet(meet.id!),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: kColorBorder,
-                        ),
+                  if (meet.status == MeetStatus.belumDipublish)
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: ElevatedButton(
+                        onPressed: () => MyApp.meetBloc.add(PublishMeet(meet.id!)),
+                        style: ElevatedButton.styleFrom(backgroundColor: kColorBorder),
                         child: const Text('Pubish Jadwal'),
                       ),
-                    ],
-                  ),
+                    ),
                 ],
               ),
             ),
@@ -160,8 +151,20 @@ TableRow _buildLinkTableRow(BuildContext context, String label, String? url) {
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kColorBorder),
         maxLines: 1,
       ),
+      Text(
+        ' : ',
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kColorBorder),
+      ),
       InkWell(
-        onTap: () => _launchURL(url),
+        onTap: () async {
+          try {
+            if (!await launchUrl(Uri.parse(url))) {
+              throw 'Error';
+            }
+          } catch (e) {
+            showErrorDialog('Url tidak bisa dibuka');
+          }
+        },
         child: Text(
           url!,
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kColorBorder),
@@ -179,20 +182,13 @@ TableRow _buildTableRow(BuildContext context, String label, String? value) {
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kColorBorder),
       ),
       Text(
+        ' : ',
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kColorBorder),
+      ),
+      Text(
         value ?? '',
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kColorBorder),
       ),
     ],
   );
-}
-
-Future<void> _launchURL(String? url) async {
-  try {
-    final Uri url0 = Uri.parse(url!);
-    if (!await launchUrl(url0)) {
-      throw 'Error';
-    }
-  } catch (e) {
-    showErrorDialog('Url tidak bisa dibuka');
-  }
 }

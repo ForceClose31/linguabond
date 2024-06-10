@@ -1488,7 +1488,7 @@ mixin _$Meet {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
+  MeetStatus? get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1513,7 +1513,7 @@ abstract class $MeetCopyWith<$Res> {
       @JsonKey(name: 'mentor_id', fromJson: _parseInt) int? mentorId,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
-      String? status});
+      MeetStatus? status});
 }
 
 /// @nodoc
@@ -1595,7 +1595,7 @@ class _$MeetCopyWithImpl<$Res, $Val extends Meet>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as MeetStatus?,
     ) as $Val);
   }
 }
@@ -1620,7 +1620,7 @@ abstract class _$$MeetImplCopyWith<$Res> implements $MeetCopyWith<$Res> {
       @JsonKey(name: 'mentor_id', fromJson: _parseInt) int? mentorId,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
-      String? status});
+      MeetStatus? status});
 }
 
 /// @nodoc
@@ -1699,7 +1699,7 @@ class __$$MeetImplCopyWithImpl<$Res>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as MeetStatus?,
     ));
   }
 }
@@ -1757,7 +1757,7 @@ class _$MeetImpl implements _Meet {
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
   @override
-  final String? status;
+  final MeetStatus? status;
 
   @override
   String toString() {
@@ -1838,7 +1838,7 @@ abstract class _Meet implements Meet {
       @JsonKey(name: 'mentor_id', fromJson: _parseInt) final int? mentorId,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
-      final String? status}) = _$MeetImpl;
+      final MeetStatus? status}) = _$MeetImpl;
 
   factory _Meet.fromJson(Map<String, dynamic> json) = _$MeetImpl.fromJson;
 
@@ -1874,7 +1874,7 @@ abstract class _Meet implements Meet {
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;
   @override
-  String? get status;
+  MeetStatus? get status;
   @override
   @JsonKey(ignore: true)
   _$$MeetImplCopyWith<_$MeetImpl> get copyWith =>

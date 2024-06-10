@@ -1,10 +1,11 @@
 part of '../blocs.dart';
 
-abstract class MeetState {
-  const MeetState();
-}
+@immutable
+abstract class MeetState {}
 
 class MeetInitial extends MeetState {}
+
+class MeetError extends MeetState {}
 
 class MeetDataLoaded extends MeetState {
   MeetDataLoaded({
@@ -13,19 +14,3 @@ class MeetDataLoaded extends MeetState {
 
   final List<Meet> meet;
 }
-
-class MeetLoading extends MeetState {}
-
-class MeetLoaded extends MeetState {
-  final List<Meet> meets;
-
-  const MeetLoaded(this.meets);
-}
-
-class MeetError extends MeetState {
-  final String message;
-
-  const MeetError(this.message);
-}
-
-class MeetPublished extends MeetState {}

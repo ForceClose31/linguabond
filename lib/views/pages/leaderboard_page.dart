@@ -58,7 +58,7 @@ class LeaderboardPage extends StatelessWidget {
                                         tag: 'Leaderboard $index',
                                         width: 56.0,
                                         height: 56.0,
-                                        image: NetworkImage(leaderboard.foto ?? ''),
+                                        image: CachedNetworkImageProvider(leaderboard.foto ?? ''),
                                         containerBackgroundColor: const Color(0xFFA590A7),
                                         dialogBackgroundColor: const Color(0xFFA590A7),
                                         child: Padding(

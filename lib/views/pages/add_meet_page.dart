@@ -46,6 +46,18 @@ class _MeetFormState extends State<MeetForm> {
   DateTime? _tanggal;
 
   @override
+  void dispose() {
+    _topikController.dispose();
+    _linkController.dispose();
+    _deskripsiController.dispose();
+    _startTimeController.dispose();
+    _endTimeController.dispose();
+    _tanggalController.dispose();
+    _pesertaController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
@@ -63,6 +75,7 @@ class _MeetFormState extends State<MeetForm> {
               }
               return null;
             },
+            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 24.0),
           TextFormField(
@@ -76,6 +89,7 @@ class _MeetFormState extends State<MeetForm> {
               }
               return null;
             },
+            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 24.0),
           TextFormField(
@@ -89,6 +103,7 @@ class _MeetFormState extends State<MeetForm> {
               }
               return null;
             },
+            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 24.0),
           TextFormField(
@@ -110,11 +125,11 @@ class _MeetFormState extends State<MeetForm> {
                     pickedTime.hour,
                     pickedTime.minute,
                   );
-                  _startTimeController.text =
-                      DateFormat('yyyy-MM-dd HH:mm:ss').format(_startTime!);
+                  _startTimeController.text = TimeOfDay.fromDateTime(_startTime!).toFormattedString();
                 });
               }
             },
+            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 24.0),
           TextFormField(
@@ -136,11 +151,11 @@ class _MeetFormState extends State<MeetForm> {
                     pickedTime.hour,
                     pickedTime.minute,
                   );
-                  _endTimeController.text =
-                      DateFormat('yyyy-MM-dd HH:mm:ss').format(_endTime!);
+                  _endTimeController.text = TimeOfDay.fromDateTime(_endTime!).toFormattedString();
                 });
               }
             },
+            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 24.0),
           TextFormField(
@@ -158,11 +173,11 @@ class _MeetFormState extends State<MeetForm> {
               if (pickedDate != null) {
                 setState(() {
                   _tanggal = pickedDate;
-                  _tanggalController.text =
-                      DateFormat('yyyy-MM-dd').format(_tanggal!);
+                  _tanggalController.text = DateFormat('yyyy-MM-dd').format(_tanggal!);
                 });
               }
             },
+            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 24.0),
           TextFormField(
@@ -171,6 +186,7 @@ class _MeetFormState extends State<MeetForm> {
               labelText: 'Jumlah peserta',
             ),
             keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 24.0),
           TextFormField(
@@ -181,6 +197,12 @@ class _MeetFormState extends State<MeetForm> {
               labelText: 'Deskripsi',
               alignLabelWithHint: true,
             ),
+            onEditingComplete: () {
+              if (_formKey.currentState!.validate()) {
+                _submitForm();
+              }
+            },
+            maxLength: 255,
           ),
           const SizedBox(height: 16.0),
           MyFilledButton(
@@ -200,38 +222,41 @@ class _MeetFormState extends State<MeetForm> {
   Future<void> _submitForm() async {
     final topik = _topikController.text;
     final linkLink = _linkController.text;
-    final deskripsi = _deskripsiController.text;
     final materi = _materiController.text;
     final startTime = _startTimeController.text;
     final endTime = _endTimeController.text;
     final tanggal = _tanggalController.text;
+    final deskripsi = _deskripsiController.text;
     final peserta = _pesertaController.text;
 
-    await ApiHelper.post(
-      pathUrl: dotenv.env['ENDPOINT_MEET_MENTOR_ADD']!,
-      body: {
-        'topik': topik,
-        'link': linkLink,
-        'materi': materi,
-        'jam_mulai': startTime,
-        'jam_berakhir': endTime,
-        'tanggal': tanggal,
-        'deskripsi': deskripsi,
-        'total_remaja': peserta,
-      },
-    );
-    NavigationHelper.back();
-  }
+    // await ApiHelper.post(
+    //   pathUrl: dotenv.env['ENDPOINT_MEET_MENTOR_ADD']!,
+    //   body: {
+    //     'topik': topik,
+    //     'link': linkLink,
+    //     'materi': materi,
+    //     'jam_mulai': startTime,
+    //     'jam_berakhir': endTime,
+    //     'tanggal': tanggal,
+    //     'deskripsi': deskripsi,
+    //     'total_remaja': peserta,
+    //   },
+    // );
+    // NavigationHelper.back();
 
-  @override
-  void dispose() {
-    _topikController.dispose();
-    _linkController.dispose();
-    _deskripsiController.dispose();
-    _startTimeController.dispose();
-    _endTimeController.dispose();
-    _tanggalController.dispose();
-    _pesertaController.dispose();
-    super.dispose();
+    MyApp.meetBloc.add(
+      AddMeet(
+        Meet(
+          topik: topik,
+          link: linkLink,
+          materi: materi,
+          jamMulai: _startTime,
+          jamBerakhir: _endTime,
+          tanggal: _tanggal,
+          deskripsi: deskripsi,
+          totalRemaja: int.tryParse(peserta),
+        ),
+      ),
+    );
   }
 }

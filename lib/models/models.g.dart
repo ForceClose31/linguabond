@@ -152,7 +152,7 @@ _$MeetImpl _$$MeetImplFromJson(Map<String, dynamic> json) => _$MeetImpl(
       updatedAt: json['updated_at'] == null
           ? null
           : DateTime.parse(json['updated_at'] as String),
-      status: json['status'] as String?,
+      status: $enumDecodeNullable(_$MeetStatusEnumMap, json['status']),
     );
 
 Map<String, dynamic> _$$MeetImplToJson(_$MeetImpl instance) =>
@@ -169,5 +169,10 @@ Map<String, dynamic> _$$MeetImplToJson(_$MeetImpl instance) =>
       'mentor_id': instance.mentorId,
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
-      'status': instance.status,
+      'status': _$MeetStatusEnumMap[instance.status],
     };
+
+const _$MeetStatusEnumMap = {
+  MeetStatus.sudahDipublish: 'Sudah dipublish',
+  MeetStatus.belumDipublish: 'Belum dipublish',
+};

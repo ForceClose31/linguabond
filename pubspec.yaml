@@ -1,7 +1,7 @@
 name: linguabond
 description: "A new Flutter project."
 publish_to: 'none'
-version: 1.0.1+2
+version: 1.0.2+3
 
 environment:
   sdk: '>=3.4.0 <4.0.0'
@@ -24,11 +24,11 @@ dependencies:
   linguabound_widget:
     git:
       url: https://github.com/BlastTea/linguabound_widget.git
-      ref: e4728c1f0a11eed4fe1c9cc9fc35909cf6940595
+      ref: 028bf0c4bbc39ca30ee7b7f358de78be2462338e
   m_widget:
     git:
       url: https://github.com/BlastTea/MWidget.git
-      ref: b1191678af1bbefe4ffde909b42804708bb5ab17
+      ref: 106d58a7eeea6ba74334cc7c59fa300249555a27
   shared_preferences: ^2.2.3
   url_launcher: ^6.3.0
 

@@ -54,12 +54,10 @@ sealed class UserDetail with _$UserDetail {
   factory UserDetail.mentor({
     String? nama,
     String? gelar,
-    @JsonKey(name: 'riwayat_pendidikan_terakhir')
-    String? riwayatPendidikanTerakhir,
+    @JsonKey(name: 'riwayat_pendidikan_terakhir') String? riwayatPendidikanTerakhir,
   }) = Mentor;
 
-  factory UserDetail.fromJson(Map<String, dynamic> json) =>
-      _$UserDetailFromJson(json);
+  factory UserDetail.fromJson(Map<String, dynamic> json) => _$UserDetailFromJson(json);
 }
 
 @freezed
@@ -79,8 +77,7 @@ class Leaderboard with _$Leaderboard {
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _Leaderboard;
 
-  factory Leaderboard.fromJson(Map<String, dynamic> json) =>
-      _$LeaderboardFromJson(json);
+  factory Leaderboard.fromJson(Map<String, dynamic> json) => _$LeaderboardFromJson(json);
 }
 
 enum UserRole {
@@ -103,8 +100,20 @@ class Meet with _$Meet {
     @JsonKey(name: 'mentor_id', fromJson: _parseInt) int? mentorId,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
-    String? status,
+    MeetStatus? status,
   }) = _Meet;
 
   factory Meet.fromJson(Map<String, dynamic> json) => _$MeetFromJson(json);
+}
+
+enum MeetStatus {
+  @JsonValue('Sudah dipublish')
+  sudahDipublish,
+  @JsonValue('Belum dipublish')
+  belumDipublish;
+
+  String get text => switch (this) {
+        sudahDipublish => 'Sudah Dipublish',
+        belumDipublish => 'Belum Dipublish',
+      };
 }
